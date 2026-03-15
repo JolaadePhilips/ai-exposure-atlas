@@ -810,7 +810,10 @@ function openDetail(d){
     </div><div class="dp-spacer"></div>`;
   o.classList.add('open');
   document.getElementById('dpClose').addEventListener('click',closeD);document.getElementById('detailBackdrop').addEventListener('click',closeD);
-  document.getElementById('dpCompareBtn').addEventListener('click', () => { addToCompare(d); });
+  document.getElementById('dpCompareBtn').addEventListener('click', () => {
+    addToCompare(d);
+    if (compareSlots[0] && compareSlots[1]) openCompare();
+  });
   p.querySelectorAll('.dp-similar-item').forEach(el=>el.addEventListener('click',()=>{const sd=DATA.find(x=>x.slug===el.dataset.slug);if(sd)openDetail(sd);}));
 }
 function closeD(){document.getElementById('detailOverlay').classList.remove('open');}
@@ -1178,7 +1181,18 @@ async function init(){
     heroResult.classList.add('visible');
 
     document.getElementById('heroResultDetail').addEventListener('click', () => openDetail(d));
-    document.getElementById('heroResultCompare').addEventListener('click', () => { addToCompare(d); });
+    document.getElementById('heroResultCompare').addEventListener('click', () => {
+      addToCompare(d);
+      // If we need a second job, clear and prompt
+      if (compareSlots[0] && !compareSlots[1]) {
+        heroInput.value = '';
+        heroInput.placeholder = 'Now search for the second job to compare...';
+        heroResult.classList.remove('visible');
+        heroInput.focus();
+      } else if (compareSlots[0] && compareSlots[1]) {
+        openCompare();
+      }
+    });
   }
 
   heroInput.addEventListener('input', () => {
@@ -1202,7 +1216,20 @@ async function init(){
 
     heroDD.querySelectorAll('.hsr-item').forEach(el => el.addEventListener('click', () => {
       const d = DATA.find(x => x.slug === el.dataset.slug);
-      if (d) { heroInput.value = d.title; closeHeroSearch(); showHeroResult(d); }
+      if (!d) return;
+      // If we're waiting for a second compare job, add it and open compare
+      if (compareSlots[0] && !compareSlots[1]) {
+        heroInput.value = d.title;
+        heroInput.placeholder = 'e.g. Software developer, Nurse, Teacher...';
+        closeHeroSearch();
+        addToCompare(d);
+        showHeroResult(d);
+        openCompare();
+      } else {
+        heroInput.value = d.title;
+        closeHeroSearch();
+        showHeroResult(d);
+      }
     }));
   });
 
