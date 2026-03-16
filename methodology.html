@@ -187,7 +187,7 @@ tr:hover { background: var(--bg-subtle); }
 <table>
 <tr><th>Data</th><th>Source</th><th>Date</th></tr>
 <tr><td>Occupations, pay, employment, growth</td><td><a href="https://www.bls.gov/ooh/">Bureau of Labor Statistics — Occupational Outlook Handbook</a></td><td>2024 edition (projections to 2034)</td></tr>
-<tr><td>AI exposure scores</td><td>LLM scoring (Gemini Flash) with custom rubric</td><td>2024</td></tr>
+<tr><td>AI exposure scores</td><td>LLM scoring (Gemini Flash) with custom rubric — original by Andrej Karpathy</td><td>2024</td></tr>
 <tr><td>Occupation count</td><td>342 occupations</td><td>—</td></tr>
 <tr><td>Average exposure</td><td>5.3/10 across all occupations</td><td>—</td></tr>
 </table>
@@ -227,36 +227,40 @@ tr:hover { background: var(--bg-subtle); }
 <tr><td>Employment counts</td><td><a href="https://www.nomisweb.co.uk/">NOMIS</a> — Annual Population Survey (NM_218_1)</td><td>Oct 2024 – Sep 2025</td></tr>
 <tr><td>Entry requirements</td><td>SOC 2020 Volume 1</td><td>—</td></tr>
 <tr><td>Occupation count</td><td>412 unit groups (4-digit SOC)</td><td>—</td></tr>
-<tr><td>Average exposure</td><td>5.0/10 across all occupations</td><td>—</td></tr>
+<tr><td>Average exposure</td><td>4.4/10 across all occupations</td><td>—</td></tr>
 </table>
 
 <h3>UK Scoring Methodology (Detail)</h3>
 
-<p>Since we could not run the same LLM scoring pipeline used for the US edition (which required API access to score each occupation individually), the UK scores were generated using a two-step approach:</p>
+<p>Each of the 412 UK occupations was <strong>individually scored by Claude (Opus 4.6)</strong> — the same LLM-based approach used for the US edition. The model read each occupation's full SOC 2020 description, complete task list, and entry requirements before assigning a score and writing a specific rationale.</p>
 
-<h3>Step 1: US Crosswalk (114 occupations)</h3>
-<p>For occupations with clear US equivalents, we directly mapped the US exposure score. Matching was done by <strong>fuzzy title matching</strong> — comparing word overlap between UK SOC titles and US BLS titles, requiring at least 40% word overlap for a match.</p>
-<p>Examples: "Programmers and software development professionals" → US "Software developers" (9), "Solicitors and lawyers" → US "Lawyers" (8).</p>
-
-<h3>Step 2: Heuristic Scoring (298 occupations)</h3>
-<p>For occupations without a US match, scores were assigned using a rules-based system combining:</p>
-
-<ol>
-<li><strong>Keyword analysis</strong> — scanning job title and SOC task descriptions for terms indicating digital work (software, data, financial analysis → high) or physical work (construction, cleaning, driving → low)</li>
-<li><strong>SOC major group patterns</strong> — each of the 9 SOC major groups has a characteristic exposure range:
+<h3>Scoring Process</h3>
+<p>The 412 occupations were split into 4 batches of ~103 and scored in parallel. For each occupation, Claude received:</p>
 <ul>
-<li>Group 4 (Admin & Secretarial) → base 8</li>
-<li>Group 2 (Professional) → base 6, adjusted by sub-field</li>
-<li>Group 5 (Skilled Trades) → base 2</li>
-<li>Group 9 (Elementary) → base 2</li>
+<li>The <strong>SOC 2020 occupation title</strong> and 4-digit code</li>
+<li>The <strong>full description</strong> from ONS SOC Volume 1 (what the occupation involves)</li>
+<li>The <strong>complete task list</strong> (specific duties workers perform)</li>
+<li>The <strong>entry requirements</strong> (qualifications and routes in)</li>
+<li>The same <strong>scoring rubric</strong> used for the US edition (0–10 scale based on task automation potential, output digitality, and environmental factors)</li>
 </ul>
-</li>
-<li><strong>Output digitality</strong> — occupations where the primary output is digital (reports, code, designs) scored higher than those with physical outputs</li>
-</ol>
+
+<p>Each occupation received a score and a <strong>written rationale</strong> referencing the actual tasks described in the SOC classification — not generic assumptions.</p>
+
+<h3>Score Distribution</h3>
+<table>
+<tr><th>Score</th><th>Count</th><th>% of Occupations</th></tr>
+<tr><td>0–1</td><td>55</td><td>13%</td></tr>
+<tr><td>2–3</td><td>122</td><td>30%</td></tr>
+<tr><td>4–5</td><td>83</td><td>20%</td></tr>
+<tr><td>6–7</td><td>91</td><td>22%</td></tr>
+<tr><td>8–9</td><td>61</td><td>15%</td></tr>
+</table>
+
+<p>Average exposure across all 412 occupations: <strong>4.4/10</strong>. Approximately <strong>39% of the UK workforce</strong> (13 million workers) are in occupations scoring 7 or higher.</p>
 
 <div class="callout">
-<div class="callout-label">Important Limitation</div>
-<p>The UK scores are <strong>estimates</strong>, not individually calibrated LLM assessments like the US scores. While the crosswalked scores (114 occupations covering the major professions) are high-confidence, the heuristic scores (298 occupations) should be treated as indicative rather than precise. We plan to improve these with individual LLM scoring in a future update.</p>
+<div class="callout-label">Methodology Note</div>
+<p>The UK scores use the same LLM-based methodology as the US edition (individual assessment per occupation), but with a different model (Claude Opus 4.6 vs Gemini Flash) and different occupation descriptions (UK SOC 2020 vs US BLS OOH). Minor scoring differences between the US and UK editions for equivalent occupations are expected due to these differences in model and input data.</p>
 </div>
 
 <h2>What This Is Not</h2>
