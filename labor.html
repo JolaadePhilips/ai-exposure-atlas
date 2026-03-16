@@ -8,14 +8,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#fafaf8;--bg-e:#fff;--bg-s:#f3f3f0;--bd:rgba(0,0,0,0.08);--bd2:rgba(0,0,0,0.12);--t1:#1a1a1a;--t2:rgba(26,26,26,0.6);--t3:rgba(26,26,26,0.35);--ac:#b8860b;--acl:rgba(184,134,11,0.08);--us:#4a6fa5;--uk:#c0392b;--usl:rgba(74,111,165,0.1);--ukl:rgba(192,57,43,0.1);--green:#0f766e;--red:#d03838;--fd:'Instrument Serif',Georgia,serif;--fb:'DM Sans',sans-serif;--fm:'JetBrains Mono',monospace;--ss:0 1px 3px rgba(0,0,0,0.04);--sm:0 4px 16px rgba(0,0,0,0.06)}
-*{margin:0;padding:0;box-sizing:border-box}
-html{font-size:16px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+:root{--bg:#fafaf8;--bg-e:#fff;--bg-s:#f3f3f0;--bd:rgba(0,0,0,.08);--bd2:rgba(0,0,0,.12);--t1:#1a1a1a;--t2:rgba(26,26,26,.6);--t3:rgba(26,26,26,.35);--ac:#b8860b;--acl:rgba(184,134,11,.08);--us:#4a6fa5;--uk:#c0392b;--usl:rgba(74,111,165,.08);--ukl:rgba(192,57,43,.08);--green:#0f766e;--red:#d03838;--fd:'Instrument Serif',Georgia,serif;--fb:'DM Sans',sans-serif;--fm:'JetBrains Mono',monospace;--ss:0 1px 3px rgba(0,0,0,.04);--sm:0 4px 16px rgba(0,0,0,.06)}
+*{margin:0;padding:0;box-sizing:border-box}html{font-size:16px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
 body{background:var(--bg);color:var(--t1);font-family:var(--fb)}
-body::before{content:'';position:fixed;inset:0;opacity:0.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px;pointer-events:none;z-index:9999}
+body::before{content:'';position:fixed;inset:0;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px;pointer-events:none;z-index:9999}
 
-.tn{position:sticky;top:0;z-index:90;border-bottom:1px solid var(--bd);backdrop-filter:blur(12px);background:rgba(250,250,248,0.85)}
-[data-theme="dark"] .tn{background:rgba(10,10,15,0.85)}
+.tn{position:sticky;top:0;z-index:90;border-bottom:1px solid var(--bd);backdrop-filter:blur(12px);background:rgba(250,250,248,.85)}
+[data-theme="dark"] .tn{background:rgba(10,10,15,.85)}
 .tni{max-width:1400px;margin:0 auto;padding:0 3rem;display:flex;align-items:center;justify-content:space-between;height:48px}
 .tnb{font-family:var(--fd);font-size:1rem;color:var(--t1);text-decoration:none}
 .tnb em{font-style:italic;color:var(--ac)}
@@ -24,78 +23,72 @@ body::before{content:'';position:fixed;inset:0;opacity:0.03;background-image:url
 .tna:hover{color:var(--t2)}.tna.on{color:var(--ac);border-bottom-color:var(--ac)}
 .ttg{width:34px;height:34px;background:var(--bg-s);border:1px solid var(--bd);border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.95rem}
 
-[data-theme="dark"]{--bg:#0a0a0f;--bg-e:#14141e;--bg-s:#1e1e2a;--bd:rgba(255,255,255,0.07);--bd2:rgba(255,255,255,0.12);--t1:#e8e6e1;--t2:rgba(232,230,225,0.55);--t3:rgba(232,230,225,0.3);--ac:#f0c674;--us:#6b8fc4;--uk:#e05555;--usl:rgba(107,143,196,0.12);--ukl:rgba(224,85,85,0.1);--green:#22a88a;--ss:0 1px 3px rgba(0,0,0,0.2);--sm:0 4px 16px rgba(0,0,0,0.3)}
+[data-theme="dark"]{--bg:#0a0a0f;--bg-e:#14141e;--bg-s:#1e1e2a;--bd:rgba(255,255,255,.07);--bd2:rgba(255,255,255,.12);--t1:#e8e6e1;--t2:rgba(232,230,225,.55);--t3:rgba(232,230,225,.3);--ac:#f0c674;--us:#6b8fc4;--uk:#e05555;--green:#22a88a;--ss:0 1px 3px rgba(0,0,0,.2);--sm:0 4px 16px rgba(0,0,0,.3)}
+[data-theme="dark"] ::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08)}
 
-.pg{max-width:1200px;margin:0 auto;padding:3rem 3rem 5rem}
-.ey{font-family:var(--fm);font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--ac);margin-bottom:.5rem}
-.h1{font-family:var(--fd);font-size:clamp(2.2rem,4.5vw,3.5rem);font-weight:400;line-height:1.05;margin-bottom:.5rem}
-.h1 em{font-style:italic;color:var(--ac)}
-.desc{font-size:.95rem;font-weight:300;color:var(--t2);max-width:620px;line-height:1.6;margin-bottom:2.5rem}
+.pg{max-width:900px;margin:0 auto;padding:3rem 2rem 5rem}
 
-/* Section nav */
-.snav{display:flex;gap:.5rem;margin-bottom:2rem;flex-wrap:wrap;position:sticky;top:48px;z-index:50;background:var(--bg);padding:.75rem 0;border-bottom:1px solid var(--bd)}
-.snav-btn{padding:.45rem .9rem;background:var(--bg-e);border:1px solid var(--bd);border-radius:8px;font-family:var(--fm);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);cursor:pointer;transition:all .2s;text-decoration:none;white-space:nowrap}
-.snav-btn:hover{color:var(--t2);border-color:var(--bd2)}
-.snav-btn.on{background:var(--acl);border-color:rgba(184,134,11,.2);color:var(--ac)}
+/* ── Story blocks ── */
+.story{margin-bottom:4rem;opacity:0;transform:translateY(30px);transition:opacity .6s ease-out,transform .6s ease-out}
+.story.vis{opacity:1;transform:translateY(0)}
 
-/* Cards */
-.card{background:var(--bg-e);border:1px solid var(--bd);border-radius:14px;overflow:hidden;box-shadow:var(--ss);margin-bottom:1.5rem}
-.card-h{padding:.85rem 1.25rem;border-bottom:1px solid var(--bd);background:var(--bg-s);display:flex;align-items:center;justify-content:space-between}
-.card-t{font-family:var(--fd);font-size:1.1rem}
-.card-b{padding:1.25rem}
+.story-num{font-family:var(--fm);font-size:5rem;font-weight:300;line-height:1;color:var(--t3);opacity:.15;margin-bottom:-.5rem}
+.story-h{font-family:var(--fd);font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:400;line-height:1.15;margin-bottom:1rem}
+.story-h em{font-style:italic;color:var(--ac)}
+.story-p{font-size:1rem;font-weight:300;color:var(--t2);line-height:1.75;margin-bottom:1.25rem;max-width:640px}
+.story-p strong{font-weight:500;color:var(--t1)}
 
-/* Hero grid */
-.hg{display:grid;grid-template-columns:1fr 80px 1fr;gap:0;margin-bottom:2rem;background:var(--bg-e);border:1px solid var(--bd);border-radius:14px;overflow:hidden;box-shadow:var(--sm)}
-.hc{padding:1.5rem}
-.hc-flag{font-size:1.8rem;margin-bottom:.4rem}
-.hc-name{font-family:var(--fd);font-size:1.3rem;margin-bottom:.1rem}
-.hc-sub{font-family:var(--fm);font-size:.5rem;color:var(--t3);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem}
-.hc-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
-.hc-v{font-family:var(--fd);font-size:1.4rem;line-height:1}
-.hc-l{font-family:var(--fm);font-size:.45rem;letter-spacing:.15em;text-transform:uppercase;color:var(--t3)}
-.hg-vs{display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:1.5rem;font-style:italic;color:var(--t3);border-left:1px solid var(--bd);border-right:1px solid var(--bd)}
+/* Explain box */
+.explain{background:var(--bg-s);border:1px solid var(--bd);border-radius:12px;padding:1.25rem 1.5rem;margin:1.5rem 0}
+.explain summary{font-family:var(--fm);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ac);cursor:pointer;list-style:none;display:flex;align-items:center;gap:.5rem;user-select:none}
+.explain summary::before{content:'▸';transition:transform .2s}
+.explain[open] summary::before{transform:rotate(90deg)}
+.explain-body{margin-top:.75rem;font-size:.88rem;font-weight:300;color:var(--t2);line-height:1.7}
+.explain-body p{margin-bottom:.6rem}
 
-/* Insight */
-.ins{background:var(--bg-s);border:1px solid var(--bd);border-left:3px solid var(--ac);border-radius:10px;padding:1.1rem 1.3rem;margin-bottom:1.5rem}
-.ins-l{font-family:var(--fm);font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:.25rem}
-.ins-t{font-size:.88rem;font-weight:300;color:var(--t2);line-height:1.6}
-.ins-t strong{font-weight:500;color:var(--t1)}
+/* Big number */
+.big-num{display:flex;align-items:baseline;gap:.5rem;margin:1.5rem 0}
+.big-num-val{font-family:var(--fd);font-size:4.5rem;line-height:1}
+.big-num-unit{font-family:var(--fm);font-size:.8rem;color:var(--t3);letter-spacing:.08em}
 
-/* Section */
-.sec{margin-bottom:3rem;scroll-margin-top:120px}
-.sec-h{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:.75rem}
-.sec-t{font-family:var(--fd);font-size:1.4rem}
-.sec-s{font-size:.78rem;font-weight:300;color:var(--t2)}
+/* Comparison card */
+.vs-card{display:grid;grid-template-columns:1fr auto 1fr;gap:0;background:var(--bg-e);border:1px solid var(--bd);border-radius:14px;overflow:hidden;box-shadow:var(--sm);margin:1.5rem 0}
+.vs-side{padding:1.25rem 1.5rem}
+.vs-flag{font-size:1.5rem;margin-bottom:.3rem}
+.vs-label{font-family:var(--fm);font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--t3);margin-bottom:.4rem}
+.vs-val{font-family:var(--fd);font-size:1.8rem;line-height:1;margin-bottom:.15rem}
+.vs-sub{font-size:.75rem;font-weight:300;color:var(--t3)}
+.vs-mid{display:flex;align-items:center;justify-content:center;padding:0 1rem;font-family:var(--fd);font-size:1.2rem;font-style:italic;color:var(--t3);border-left:1px solid var(--bd);border-right:1px solid var(--bd)}
 
-/* Legend */
-.leg{display:flex;gap:1.5rem;margin-bottom:1rem}
-.leg-i{display:flex;align-items:center;gap:.3rem;font-family:var(--fm);font-size:.58rem;color:var(--t3)}
-.leg-d{width:10px;height:10px;border-radius:3px}
+/* Currency toggle */
+.curr-toggle{display:inline-flex;background:var(--bg-s);border:1px solid var(--bd);border-radius:8px;overflow:hidden;margin:1rem 0}
+.curr-btn{padding:.4rem .8rem;font-family:var(--fm);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);cursor:pointer;border:none;background:none;transition:all .2s}
+.curr-btn.on{background:var(--acl);color:var(--ac)}
+.curr-btn:hover:not(.on){color:var(--t2)}
 
-/* Expandable */
-.expand-btn{display:flex;align-items:center;justify-content:center;padding:.6rem;background:none;border:1px solid var(--bd);border-radius:8px;width:100%;font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);cursor:pointer;transition:all .2s;margin-top:.5rem}
-.expand-btn:hover{border-color:var(--ac);color:var(--ac)}
-.expandable{max-height:0;overflow:hidden;transition:max-height .4s ease}
-.expandable.open{max-height:2000px}
+/* Chart card */
+.chart{background:var(--bg-e);border:1px solid var(--bd);border-radius:14px;overflow:hidden;box-shadow:var(--ss);margin:1.5rem 0}
+.chart-h{padding:.85rem 1.25rem;border-bottom:1px solid var(--bd);background:var(--bg-s);display:flex;align-items:center;justify-content:space-between}
+.chart-t{font-family:var(--fd);font-size:1.05rem}
+.chart-b{padding:1.25rem}
 
-/* Bars */
+/* Bar rows */
 .br{display:flex;align-items:center;gap:.5rem;padding:.45rem 0;border-bottom:1px solid var(--bd);transition:background .1s;cursor:default}
 .br:hover{background:var(--bg-s)}
 .br:last-child{border-bottom:none}
-.br-n{font-size:.75rem;width:190px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.br-n{font-size:.75rem;width:180px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .br-bars{flex:1;display:flex;align-items:center;gap:2px;height:20px}
 .br-b{height:100%;border-radius:3px;opacity:.7;transition:width .6s cubic-bezier(.16,1,.3,1)}
 .br-v{font-family:var(--fm);font-size:.6rem;color:var(--t3);width:130px;flex-shrink:0;text-align:right;white-space:nowrap}
 .br-x{font-family:var(--fm);font-size:.62rem;font-weight:500;width:38px;flex-shrink:0;text-align:center}
 
-/* Histogram */
-.hist-row{display:flex;align-items:flex-end;gap:2px}
-.hist-bar{border-radius:3px 3px 0 0;transition:height .5s cubic-bezier(.16,1,.3,1);min-width:8px;cursor:pointer;position:relative}
-.hist-bar:hover{opacity:1!important}
-.hist-label{font-family:var(--fm);font-size:.5rem;color:var(--t3);text-align:center;margin-top:.3rem}
+/* Legend */
+.leg{display:flex;gap:1.5rem;margin-bottom:.75rem}
+.leg-i{display:flex;align-items:center;gap:.3rem;font-family:var(--fm);font-size:.58rem;color:var(--t3)}
+.leg-d{width:10px;height:10px;border-radius:3px}
 
 /* Top lists */
-.tg{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin:1.5rem 0}
 .tl{background:var(--bg-e);border:1px solid var(--bd);border-radius:14px;overflow:hidden;box-shadow:var(--ss)}
 .tl-h{padding:.75rem 1.1rem;border-bottom:1px solid var(--bd);background:var(--bg-s);display:flex;align-items:center;gap:.5rem}
 .tl-flag{font-size:1rem}
@@ -109,21 +102,20 @@ body::before{content:'';position:fixed;inset:0;opacity:0.03;background-image:url
 .ti-j{font-family:var(--fm);font-size:.55rem;color:var(--t3);flex-shrink:0;width:55px;text-align:right}
 
 /* Percentile */
-.pct-r{display:flex;align-items:center;gap:.7rem;padding:.55rem 0;border-bottom:1px solid var(--bd)}
-.pct-l{font-family:var(--fm);font-size:.68rem;width:30px;color:var(--t3);flex-shrink:0}
-.pct-bars{flex:1;position:relative;height:24px}
-.pct-b{position:absolute;top:0;height:11px;border-radius:3px;opacity:.75;transition:width .6s cubic-bezier(.16,1,.3,1)}
-.pct-b.uk{top:13px}
+.pct-r{display:flex;align-items:center;gap:.7rem;padding:.6rem 0;border-bottom:1px solid var(--bd)}
+.pct-l{font-family:var(--fm);font-size:.7rem;width:30px;color:var(--t3)}
+.pct-bars{flex:1;position:relative;height:26px}
+.pct-b{position:absolute;top:0;height:12px;border-radius:3px;opacity:.75;transition:width .6s cubic-bezier(.16,1,.3,1)}
+.pct-b.uk{top:14px}
 .pct-v{font-family:var(--fm);font-size:.6rem;color:var(--t2);width:95px;text-align:right;flex-shrink:0}
 .pct-x{font-family:var(--fm);font-size:.58rem;color:var(--t3);width:36px;text-align:center;flex-shrink:0}
 
-/* Edu chart */
+/* Edu */
 .edu-r{display:flex;align-items:center;gap:.6rem;padding:.5rem 0;border-bottom:1px solid var(--bd)}
-.edu-l{font-size:.72rem;width:180px;flex-shrink:0;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.edu-l{font-size:.72rem;width:170px;flex-shrink:0;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .edu-track{flex:1;height:8px;background:var(--bg-s);border-radius:4px;overflow:hidden}
 .edu-fill{height:100%;border-radius:4px;transition:width .6s cubic-bezier(.16,1,.3,1)}
 .edu-v{font-family:var(--fm);font-size:.68rem;width:70px;flex-shrink:0;text-align:right}
-.edu-c{font-family:var(--fm);font-size:.55rem;color:var(--t3);width:40px;flex-shrink:0;text-align:right}
 
 /* Growth */
 .gr{display:flex;align-items:center;gap:.5rem;padding:.4rem 0;border-bottom:1px solid var(--bd)}
@@ -132,295 +124,368 @@ body::before{content:'';position:fixed;inset:0;opacity:0.03;background-image:url
 .gr-p{font-family:var(--fm);font-size:.65rem;color:var(--t3);width:65px;text-align:right;flex-shrink:0}
 .gr-j{font-family:var(--fm);font-size:.55rem;color:var(--t3);width:55px;text-align:right;flex-shrink:0}
 
+/* Did you know */
+.dyk{background:linear-gradient(135deg,var(--usl),var(--ukl));border:1px solid var(--bd);border-radius:14px;padding:1.5rem;margin:2rem 0;position:relative;overflow:hidden}
+.dyk::before{content:'💡';position:absolute;top:-8px;right:12px;font-size:2.5rem;opacity:.15}
+.dyk-label{font-family:var(--fm);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:.4rem}
+.dyk-text{font-size:.95rem;font-weight:300;line-height:1.65;color:var(--t2)}
+.dyk-text strong{font-weight:500;color:var(--t1)}
+
+/* Expand */
+.expand-btn{display:flex;align-items:center;justify-content:center;padding:.6rem;background:none;border:1px solid var(--bd);border-radius:8px;width:100%;font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);cursor:pointer;transition:all .2s;margin-top:.5rem}
+.expand-btn:hover{border-color:var(--ac);color:var(--ac)}
+.expandable{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.expandable.open{max-height:3000px}
+
+/* All jobs search */
+.job-search{display:flex;gap:.75rem;margin-bottom:1rem;flex-wrap:wrap}
+.job-input{flex:1;min-width:200px;padding:.55rem .9rem;background:var(--bg-e);border:1px solid var(--bd);border-radius:8px;color:var(--t1);font-family:var(--fb);font-size:.82rem;outline:none}
+.job-select{padding:.55rem .9rem;background:var(--bg-e);border:1px solid var(--bd);border-radius:8px;color:var(--t1);font-family:var(--fb);font-size:.82rem;outline:none;cursor:pointer}
+
 /* Tooltip */
-.tip{position:fixed;pointer-events:none;z-index:1000;background:var(--bg-e);border:1px solid var(--bd2);border-radius:10px;padding:.85rem 1rem;min-width:240px;max-width:360px;box-shadow:0 12px 40px rgba(0,0,0,0.1);opacity:0;transform:translateY(6px);transition:opacity .15s,transform .15s;font-size:.8rem}
+.tip{position:fixed;pointer-events:none;z-index:1000;background:var(--bg-e);border:1px solid var(--bd2);border-radius:10px;padding:.85rem 1rem;min-width:240px;max-width:360px;box-shadow:0 12px 40px rgba(0,0,0,.1);opacity:0;transform:translateY(6px);transition:opacity .15s,transform .15s;font-size:.8rem}
 .tip.vis{opacity:1;transform:translateY(0)}
 
-.ft{max-width:1200px;margin:0 auto;padding:1.5rem 3rem;border-top:1px solid var(--bd);display:flex;justify-content:space-between;font-size:.7rem;color:var(--t3)}
+.ft{max-width:900px;margin:0 auto;padding:1.5rem 2rem;border-top:1px solid var(--bd);display:flex;justify-content:space-between;font-size:.7rem;color:var(--t3)}
 .ft a{color:var(--ac);text-decoration:none}
 
-@keyframes fu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.a{animation:fu .7s ease-out both}
-.a1{animation-delay:.05s}.a2{animation-delay:.1s}.a3{animation-delay:.15s}.a4{animation-delay:.2s}.a5{animation-delay:.25s}
-
 ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-thumb{background:rgba(0,0,0,.1);border-radius:3px}
-[data-theme="dark"] ::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08)}
 
-@media(max-width:768px){.pg{padding:2rem 1.25rem 4rem}.hg{grid-template-columns:1fr}.hg-vs{display:none}.tg{grid-template-columns:1fr}.br-n{width:120px;font-size:.68rem}.br-v{width:90px;font-size:.55rem}.snav{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch}.tni{padding:0 1rem}.edu-l{width:110px;font-size:.65rem}}
+@media(max-width:768px){.pg{padding:2rem 1.25rem 4rem}.vs-card{grid-template-columns:1fr}.vs-mid{display:none}.tg{grid-template-columns:1fr}.br-n{width:120px;font-size:.68rem}.br-v{width:90px;font-size:.55rem}.tni{padding:0 1rem}.edu-l{width:110px;font-size:.65rem}.big-num-val{font-size:3rem}}
 </style>
 </head>
 <body>
 <nav class="tn"><div class="tni"><a href="./" class="tnb">AI Exposure <em>Atlas</em></a><div class="tnt"><a href="./" class="tna">US</a><a href="./uk/" class="tna">UK</a><a href="./compare.html" class="tna">US vs UK</a><a href="./labor.html" class="tna on">Labor Market</a><a href="./methodology.html" class="tna">Methodology</a></div><div><button class="ttg" id="themeToggle"></button></div></div></nav>
 
 <div class="pg">
-<div class="a"><div class="ey">Cross-Border Analysis</div>
-<div class="h1">The <em>Pay Gap</em> Across the Atlantic</div>
-<p class="desc">Same jobs, different economies. 143M American workers vs 33M British. Every dollar, every job, every percentile — compared. The numbers tell a story about two very different labor markets.</p></div>
 
-<div class="hg a a1" id="heroGrid"></div>
+<!-- ═══ CHAPTER 1: THE HEADLINE ═══ -->
+<div class="story" id="s1">
+  <div class="story-num">01</div>
+  <div class="story-h">Americans earn <em>twice as much</em> as Brits for the same work</div>
+  <p class="story-p">We compared 70 occupations that exist in both countries — software developer, nurse, teacher, electrician, chef. On average, the American version of each job pays <strong>2.1 times more</strong> in raw dollar-to-pound terms.</p>
+  <p class="story-p">But that number is misleading without context. Here's why:</p>
 
-<nav class="snav a a2">
-<a href="#overview" class="snav-btn on">Overview</a>
-<a href="#paygap" class="snav-btn">Pay Gap by Role</a>
-<a href="#distribution" class="snav-btn">Pay Distribution</a>
-<a href="#percentiles" class="snav-btn">Percentiles</a>
-<a href="#toppay" class="snav-btn">Highest Paid</a>
-<a href="#lowpay" class="snav-btn">Lowest Paid</a>
-<a href="#biggest" class="snav-btn">Largest Employers</a>
-<a href="#education" class="snav-btn">Education vs Pay</a>
-<a href="#growth" class="snav-btn">Growth & Decline</a>
-<a href="#alljobs" class="snav-btn">All Jobs</a>
-</nav>
+  <details class="explain">
+    <summary>Wait — aren't dollars and pounds different?</summary>
+    <div class="explain-body">
+      <p>Yes. There are three ways to compare pay across countries:</p>
+      <p><strong>Nominal</strong> — just the raw numbers. A US developer earns $131K, a UK developer earns £55K. This is what job listings show, but it ignores that dollars and pounds have different values.</p>
+      <p><strong>Exchange rate</strong> — convert everything to one currency. £1 is worth about $1.27. So that UK developer actually earns ~$70K. The gap shrinks from 2.1x to about 1.6x.</p>
+      <p><strong>Purchasing power (PPP)</strong> — what can you actually <em>buy</em> with your salary? A flat in Manchester costs less than one in Austin. The NHS means no health insurance premiums. After adjusting for what money actually buys, the gap shrinks further to about 1.45x.</p>
+      <p>All three are "correct" — they just answer different questions. We show all three below.</p>
+    </div>
+  </details>
 
-<!-- Overview -->
-<div class="sec a a3" id="overview">
-<div class="ins"><div class="ins-l">The Headline</div><div class="ins-t">Americans earn <strong>2.1x more</strong> than Brits for equivalent roles on average. Even after adjusting for purchasing power parity (PPP), the gap is still <strong>1.45x</strong>. The gap <strong>widens dramatically at the top</strong> — from 1.7x at the 10th percentile to 2.4x at the 90th.</div></div>
-<div class="ins" style="border-left-color:var(--us)"><div class="ins-l">But it's not uniform</div><div class="ins-t">Marketing directors: <strong>5.2x</strong> ($159K vs £30K). Construction painters: <strong>1.1x</strong> ($48K vs £44K). Some jobs are near parity. The pattern: <strong>physical trades converge, knowledge work diverges massively</strong>. The more digital the job, the bigger the US premium.</div></div>
-<div class="ins" style="border-left-color:var(--uk)"><div class="ins-l">The Floor Gap</div><div class="ins-t">The lowest-paying US occupations ($31K) earn more than the <strong>UK national median</strong> (£34K). UK bar staff earn £9,166 and cleaners earn £11,852 — partly reflecting the UK's higher rate of part-time work, but the raw numbers are stark.</div></div>
+  <div id="currencySection">
+    <div class="curr-toggle" id="currToggle">
+      <button class="curr-btn on" data-mode="nominal">Nominal</button>
+      <button class="curr-btn" data-mode="exchange">Exchange Rate</button>
+      <button class="curr-btn" data-mode="ppp">Purchasing Power</button>
+    </div>
+    <div id="ratioHeadline"></div>
+  </div>
+
+  <div class="vs-card" id="heroCard"></div>
 </div>
 
-<!-- Pay Gap by Role -->
-<div class="sec" id="paygap">
-<div class="sec-h"><div><div class="sec-t">Same Job, Different Pay</div><div class="sec-s">70 matched occupations — US/UK pay ratio</div></div></div>
-<div class="leg"><div class="leg-i"><div class="leg-d" style="background:var(--us)"></div> US pay</div><div class="leg-i"><div class="leg-d" style="background:var(--uk)"></div> UK pay</div></div>
-<div class="card"><div class="card-b" id="ratioChart"></div><div class="expandable" id="ratioMore"></div><button class="expand-btn" id="ratioExpand">Show all 70 matched roles</button></div>
+<!-- ═══ CHAPTER 2: WHERE THE GAP IS BIGGEST ═══ -->
+<div class="story" id="s2">
+  <div class="story-num">02</div>
+  <div class="story-h">The gap isn't <em>equal</em> everywhere</div>
+  <p class="story-p">Marketing directors in the US earn <strong>5.2x</strong> their UK counterparts. But construction painters? Nearly identical — just 1.1x. The pattern is clear:</p>
+
+  <div class="dyk">
+    <div class="dyk-label">The Pattern</div>
+    <div class="dyk-text"><strong>Physical, hands-on jobs converge across borders.</strong> Knowledge work — especially in finance, tech, and management — diverges massively. The more digital the job, the bigger the American premium.</div>
+  </div>
+
+  <div class="leg"><div class="leg-i"><div class="leg-d" style="background:var(--us)"></div> US pay</div><div class="leg-i"><div class="leg-d" style="background:var(--uk)"></div> UK pay</div></div>
+  <div class="chart"><div class="chart-h"><span class="chart-t">Pay Ratio: Every Matched Role</span></div><div class="chart-b" id="ratioChart"></div><div class="expandable" id="ratioMore"></div><button class="expand-btn" id="ratioExpand">Show all 70 roles</button></div>
 </div>
 
-<!-- Pay Distribution -->
-<div class="sec" id="distribution">
-<div class="sec-h"><div><div class="sec-t">Pay Distribution</div><div class="sec-s">How occupations cluster across pay bands</div></div></div>
-<div class="ins"><div class="ins-l">What this shows</div><div class="ins-t">US pay is spread across a <strong>wide range</strong> ($20K–$240K), while UK pay is <strong>tightly compressed</strong> into the £20K–£50K band. The US has a much longer right tail — more high-paying outliers. This isn't just exchange rates; it reflects fundamentally different pay structures.</div></div>
-<div class="card"><div class="card-h"><span class="card-t">Occupation Count by Pay Band</span></div><div class="card-b"><div id="histChart" style="display:flex;gap:3rem"></div></div></div>
+<!-- ═══ CHAPTER 3: THE GAP WIDENS AT THE TOP ═══ -->
+<div class="story" id="s3">
+  <div class="story-num">03</div>
+  <div class="story-h">The richer you are, the <em>wider</em> the gap</div>
+  <p class="story-p">At the bottom of the pay scale (10th percentile), Americans earn 1.7x more. But at the top (90th percentile), it's <strong>2.4x</strong>. The Atlantic pay gap isn't just about averages — it accelerates as you move up.</p>
+
+  <details class="explain">
+    <summary>What are percentiles?</summary>
+    <div class="explain-body">
+      <p>If you lined up all occupations from lowest to highest paid, the <strong>50th percentile</strong> (P50) is the one right in the middle — half earn more, half earn less. That's the median.</p>
+      <p>P10 means "only 10% of occupations pay less than this" — it's near the bottom. P90 means "90% earn less" — it's near the top. By comparing these, we can see whether the gap is consistent across the pay spectrum or whether it grows.</p>
+    </div>
+  </details>
+
+  <div class="leg"><div class="leg-i"><div class="leg-d" style="background:var(--us)"></div> US</div><div class="leg-i"><div class="leg-d" style="background:var(--uk)"></div> UK</div></div>
+  <div class="chart"><div class="chart-h"><span class="chart-t">Pay at Each Percentile</span></div><div class="chart-b" id="pctChart"></div></div>
 </div>
 
-<!-- Percentiles -->
-<div class="sec" id="percentiles">
-<div class="sec-h"><div><div class="sec-t">Pay Across the Spectrum</div><div class="sec-s">The gap widens at the top</div></div></div>
-<div class="leg"><div class="leg-i"><div class="leg-d" style="background:var(--us)"></div> US ($)</div><div class="leg-i"><div class="leg-d" style="background:var(--uk)"></div> UK (£)</div></div>
-<div class="card"><div class="card-b" id="pctChart"></div></div>
+<!-- ═══ CHAPTER 4: THE FLOOR ═══ -->
+<div class="story" id="s4">
+  <div class="story-num">04</div>
+  <div class="story-h">The lowest-paying US jobs earn more than the <em>UK median</em></div>
+  <p class="story-p">The worst-paid US occupations (around $31,000) would place above the midpoint in the UK (£34,250). UK bar staff earn just <strong>£9,166</strong>. Cleaners earn £11,852.</p>
+
+  <details class="explain">
+    <summary>Why is UK low pay so extreme?</summary>
+    <div class="explain-body">
+      <p>Two big reasons. First, UK data includes <strong>part-time workers</strong> in the median — so bar staff earning £9K likely work 15-20 hours a week, not full-time. US data reports full-time equivalent wages.</p>
+      <p>Second, the UK has a lower minimum wage floor (£11.44/hr vs ~$7.25-$15 in the US depending on state), though most UK workers earn above minimum.</p>
+      <p>The gap is real, but the raw numbers exaggerate it. If we compared hourly rates instead of annual totals, the picture would be less dramatic at the bottom.</p>
+    </div>
+  </details>
+
+  <div class="tg" id="lowGrid"></div>
 </div>
 
-<!-- Top/Bottom Pay, Largest Employers -->
-<div class="sec" id="toppay"><div class="sec-h"><div><div class="sec-t">Highest Paying Occupations</div></div></div><div class="tg" id="topGrid"></div></div>
-<div class="sec" id="lowpay"><div class="sec-h"><div><div class="sec-t">Lowest Paying Occupations</div></div></div>
-<div class="ins" style="border-left-color:var(--uk)"><div class="ins-l">Note on UK low pay</div><div class="ins-t">UK ASHE data reports <strong>median pay including part-time workers</strong>. Roles like bar staff (£9K) and exam invigilators (£1.9K) appear extremely low because many workers are part-time. US BLS reports full-time equivalent pay, making direct comparison at the bottom end misleading. The gap is real but smaller than the raw numbers suggest.</div></div>
-<div class="tg" id="lowGrid"></div></div>
-<div class="sec" id="biggest"><div class="sec-h"><div><div class="sec-t">Largest Employers</div><div class="sec-s">Where the workers are</div></div></div>
-<div class="ins"><div class="ins-l">Structural difference</div><div class="ins-t">The US workforce is <strong>4.3x larger</strong> (143M vs 33M). The US categorizes "hand laborers" as a 7M-worker mega-category; the UK's largest single occupation is <strong>care workers</strong> (911K) — reflecting the NHS and social care system. The US has far more occupational granularity in physical labor.</div></div>
-<div class="tg" id="bigGrid"></div></div>
+<!-- ═══ CHAPTER 5: WHO EARNS THE MOST ═══ -->
+<div class="story" id="s5">
+  <div class="story-num">05</div>
+  <div class="story-h">The <em>top earners</em> in each country</div>
+  <p class="story-p">US doctors earn $239,200. The highest-paid UK occupation — airline pilots — earns £107,712. The US has <strong>14 occupations</strong> above $150K. The UK has <strong>zero</strong> above £110K.</p>
 
-<!-- Education -->
-<div class="sec" id="education">
-<div class="sec-h"><div><div class="sec-t">Education vs Pay</div><div class="sec-s">US data — how much each degree level earns</div></div></div>
-<div class="ins"><div class="ins-l">The degree premium</div><div class="ins-t">A doctoral degree earns <strong>2.9x</strong> what "no formal credential" pays ($135K vs $47K). But the biggest jump is from high school to bachelor's — a <strong>71% increase</strong>. Master's degrees barely out-earn bachelor's ($90K vs $93K), suggesting diminishing returns outside medicine and law.</div></div>
-<div class="card"><div class="card-b" id="eduChart"></div></div>
+  <div class="dyk">
+    <div class="dyk-label">Did you know?</div>
+    <div class="dyk-text">UK <strong>train drivers</strong> earn £76,176 — making them one of the highest-paid occupations in Britain, despite requiring no university degree. In the US, locomotive engineers earn $74,610 — nearly identical. One of the rare cases of transatlantic pay parity.</div>
+  </div>
+
+  <div class="tg" id="topGrid"></div>
 </div>
 
-<!-- Growth -->
-<div class="sec" id="growth">
-<div class="sec-h"><div><div class="sec-t">Fastest Growing & Declining</div><div class="sec-s">US projected growth 2024–2034 (UK growth data not available)</div></div></div>
-<div class="ins"><div class="ins-l">The pattern</div><div class="ins-t">The <strong>fastest-growing</strong> jobs are physical/green energy (wind +50%, solar +42%) and healthcare (nurse practitioners +35%). The <strong>fastest-declining</strong> are overwhelmingly digital admin — tellers, desktop publishers, bill collectors. AI and automation are reshaping both tails.</div></div>
-<div class="tg" id="growthGrid"></div>
+<!-- ═══ CHAPTER 6: WHERE THE WORKERS ARE ═══ -->
+<div class="story" id="s6">
+  <div class="story-num">06</div>
+  <div class="story-h">Two countries, <em>very different</em> workforces</div>
+  <p class="story-p">The US workforce is <strong>4.3x larger</strong> (143 million vs 33 million). But size aside, the <em>composition</em> tells a story about each society.</p>
+
+  <div class="dyk">
+    <div class="dyk-label">The story in the numbers</div>
+    <div class="dyk-text">The UK's largest single occupation is <strong>care workers</strong> (911,000) — a direct reflection of the NHS and social care system. The US equivalent is <strong>hand laborers</strong> (6.9 million) — reflecting a manufacturing and logistics economy. What a country employs the most people to do reveals what it values.</div>
+  </div>
+
+  <div class="tg" id="bigGrid"></div>
 </div>
 
-<!-- All Jobs Search -->
-<div class="sec" id="alljobs">
-<div class="sec-h"><div><div class="sec-t">All Jobs Explorer</div><div class="sec-s">Search and compare any occupation in either country</div></div></div>
-<div style="display:flex;gap:.75rem;margin-bottom:1rem;flex-wrap:wrap">
-<input type="text" id="jobSearch" placeholder="Search any job..." style="flex:1;min-width:200px;padding:.55rem .9rem;background:var(--bg-e);border:1px solid var(--bd);border-radius:8px;color:var(--t1);font-family:var(--fb);font-size:.82rem;outline:none">
-<select id="jobCountry" style="padding:.55rem .9rem;background:var(--bg-e);border:1px solid var(--bd);border-radius:8px;color:var(--t1);font-family:var(--fb);font-size:.82rem;outline:none;cursor:pointer"><option value="both">Both Countries</option><option value="us">🇺🇸 US Only</option><option value="uk">🇬🇧 UK Only</option></select>
-<select id="jobSort" style="padding:.55rem .9rem;background:var(--bg-e);border:1px solid var(--bd);border-radius:8px;color:var(--t1);font-family:var(--fb);font-size:.82rem;outline:none;cursor:pointer"><option value="pay-desc">Highest Pay</option><option value="pay-asc">Lowest Pay</option><option value="jobs-desc">Most Workers</option><option value="alpha">A–Z</option></select>
+<!-- ═══ CHAPTER 7: EDUCATION ═══ -->
+<div class="story" id="s7">
+  <div class="story-num">07</div>
+  <div class="story-h">Does a degree <em>pay off</em>?</div>
+  <p class="story-p">In the US, a doctoral degree earns <strong>2.9x</strong> what jobs requiring no formal credential pay ($135K vs $47K). The biggest jump is from high school to bachelor's — a <strong>71% increase</strong>.</p>
+  <p class="story-p">But here's the surprise: master's degrees barely out-earn bachelor's ($90K vs $93K). Unless you're going into medicine or law, the extra years may not pay off financially.</p>
+
+  <details class="explain">
+    <summary>Why don't we have UK education-pay data?</summary>
+    <div class="explain-body">
+      <p>The UK SOC classification describes entry requirements in text form ("a degree is typically required") but doesn't categorize them into structured levels the way the US BLS does. We could approximate this in a future update by parsing the text, but for now this section covers US data only.</p>
+    </div>
+  </details>
+
+  <div class="chart"><div class="chart-h"><span class="chart-t">Average Pay by Education Level (US)</span></div><div class="chart-b" id="eduChart"></div></div>
 </div>
-<div class="card"><div id="jobList" style="max-height:500px;overflow-y:auto"></div></div>
+
+<!-- ═══ CHAPTER 8: GROWTH ═══ -->
+<div class="story" id="s8">
+  <div class="story-num">08</div>
+  <div class="story-h">Which jobs are <em>growing</em> — and which are vanishing?</div>
+  <p class="story-p">The US Bureau of Labor Statistics projects employment changes through 2034. The fastest-growing jobs? <strong>Green energy and healthcare.</strong> The fastest-declining? <strong>Office admin and data entry.</strong></p>
+
+  <div class="dyk">
+    <div class="dyk-label">The pattern</div>
+    <div class="dyk-text">Jobs that require <strong>physical presence</strong> (wind turbine techs, nurse practitioners, solar installers) are booming. Jobs that involve <strong>processing information at a desk</strong> (tellers, desktop publishers, bill collectors) are contracting. This isn't just AI — it's a fundamental restructuring of what humans do for work.</div>
+  </div>
+
+  <div class="tg" id="growthGrid"></div>
 </div>
+
+<!-- ═══ CHAPTER 9: FIND YOUR JOB ═══ -->
+<div class="story" id="s9">
+  <div class="story-num">09</div>
+  <div class="story-h">Find <em>any job</em> in either country</div>
+  <p class="story-p">Search across all 700+ occupations. Filter by country. Sort by pay, workforce size, or alphabetically.</p>
+
+  <div class="job-search">
+    <input type="text" id="jobSearch" placeholder="Search any job..." class="job-input">
+    <select id="jobCountry" class="job-select"><option value="both">Both Countries</option><option value="us">🇺🇸 US Only</option><option value="uk">🇬🇧 UK Only</option></select>
+    <select id="jobSort" class="job-select"><option value="pay-desc">Highest Pay</option><option value="pay-asc">Lowest Pay</option><option value="jobs-desc">Most Workers</option><option value="alpha">A–Z</option></select>
+  </div>
+  <div class="chart"><div id="jobList" style="max-height:500px;overflow-y:auto"></div></div>
+</div>
+
 </div>
 
 <div class="tip" id="tip"></div>
 
-<div class="ft"><span>Data: <a href="https://www.bls.gov/ooh/">BLS</a> · <a href="https://www.ons.gov.uk/">ONS ASHE</a> · <a href="https://www.nomisweb.co.uk/">NOMIS</a></span><span>2026 · AI Exposure Atlas</span></div>
+<div class="ft"><span>Data: <a href="https://www.bls.gov/ooh/">BLS</a> · <a href="https://www.ons.gov.uk/">ONS ASHE 2025</a> · <a href="https://www.nomisweb.co.uk/">NOMIS</a> · Exchange: $1 = £0.79 · PPP: $1 = £0.69 (OECD 2024)</span><span>2026 · AI Exposure Atlas</span></div>
 
 <script>
+// Theme
 (function(){const s=localStorage.getItem('ai-atlas-theme');document.documentElement.setAttribute('data-theme',s||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'));const b=document.getElementById('themeToggle');function u(){b.textContent=document.documentElement.getAttribute('data-theme')==='dark'?'☀️':'🌙';}u();b.addEventListener('click',()=>{const n=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('ai-atlas-theme',n);u();});})();
 
-function fN(v){if(!v)return'0';if(v>=1e6)return(v/1e6).toFixed(1)+'M';if(v>=1e3)return(v/1e3).toFixed(0)+'K';return v.toLocaleString();}
-function fP(v,s){return v>0?s+v.toLocaleString():'N/A';}
+function fN(v){if(!v)return'0';if(v>=1e6)return(v/1e6).toFixed(1)+'M';if(v>=1e3)return Math.round(v/1e3)+'K';return v.toLocaleString();}
 
 const tip=document.getElementById('tip');
-function showTip(html,x,y){tip.innerHTML=html;let l=x+14,t=y-10;if(l+360>window.innerWidth)l=x-370;if(t<10)t=10;tip.style.left=l+'px';tip.style.top=t+'px';tip.classList.add('vis');}
+function showTip(h,x,y){tip.innerHTML=h;let l=x+14,t=y-10;if(l+360>window.innerWidth)l=x-370;if(t<10)t=10;tip.style.left=l+'px';tip.style.top=t+'px';tip.classList.add('vis');}
 function hideTip(){tip.classList.remove('vis');}
 
-let D;
+let D, currMode='nominal';
+const XR = 0.79; // USD to GBP exchange rate
+const PPP = 0.69; // USD to GBP PPP
+
+function convertUS(usd) {
+  if (currMode === 'exchange') return Math.round(usd * XR);
+  if (currMode === 'ppp') return Math.round(usd * PPP);
+  return usd;
+}
+function sym() { return currMode === 'nominal' ? '$' : '£'; }
+function ukSym() { return '£'; }
 
 async function init(){
-const res=await fetch('labor-data.json');
-D=await res.json();
+const res=await fetch('labor-data.json'); D=await res.json();
 
-// Hero
-const us=D.us,uk=D.uk;
-document.getElementById('heroGrid').innerHTML=`
-<div class="hc" style="border-top:3px solid var(--us)"><div class="hc-flag">🇺🇸</div><div class="hc-name">${us.name}</div><div class="hc-sub">${us.occupations} occupations · BLS 2024</div><div class="hc-grid"><div><div class="hc-v">${fN(us.workers)}</div><div class="hc-l">Workers</div></div><div><div class="hc-v">$${us.avg_pay.toLocaleString()}</div><div class="hc-l">Avg Pay</div></div><div><div class="hc-v">$${us.median_pay.toLocaleString()}</div><div class="hc-l">Median Pay</div></div><div><div class="hc-v">${D.matches.length}</div><div class="hc-l">Matched Roles</div></div></div></div>
-<div class="hg-vs">vs</div>
-<div class="hc" style="border-top:3px solid var(--uk)"><div class="hc-flag">🇬🇧</div><div class="hc-name">${uk.name}</div><div class="hc-sub">${uk.occupations} occupations · ONS ASHE 2025</div><div class="hc-grid"><div><div class="hc-v">${fN(uk.workers)}</div><div class="hc-l">Workers</div></div><div><div class="hc-v">£${uk.avg_pay.toLocaleString()}</div><div class="hc-l">Avg Pay</div></div><div><div class="hc-v">£${uk.median_pay.toLocaleString()}</div><div class="hc-l">Median Pay</div></div><div><div class="hc-v">${D.avg_pay_ratio||'2.1'}x</div><div class="hc-l">Pay Ratio</div></div></div></div>`;
+// Scroll reveal
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target);}});},{threshold:.1,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.story').forEach(s=>obs.observe(s));
 
-// Avg ratio
-const avgR=D.matches.reduce((s,m)=>s+m.r,0)/D.matches.length;
+render();
 
-// Pay ratio chart
-function renderRatios(container, items){
-  let h='';
-  items.forEach(m=>{
-    const usW=(m.us_p/(m.us_p+m.uk_p*1.3))*100;
-    h+=`<div class="br" data-us="${m.us_t}" data-uk="${m.uk_t}" data-usp="${m.us_p}" data-ukp="${m.uk_p}" data-r="${m.r}" data-ppp="${m.ppp_r}"><div class="br-n">${m.us_t}</div><div class="br-bars"><div class="br-b" style="width:${usW}%;background:var(--us)"></div><div class="br-b" style="width:${100-usW}%;background:var(--uk)"></div></div><div class="br-x" style="color:${m.r>=2?'var(--us)':m.r<=1.2?'var(--green)':'var(--t2)'}">${m.r}x</div><div class="br-v">$${m.us_p.toLocaleString()} vs £${m.uk_p.toLocaleString()}</div></div>`;
-  });
-  container.innerHTML=h;
-  container.querySelectorAll('.br').forEach(el=>el.addEventListener('mouseenter',e=>{
-    showTip(`<div style="font-family:var(--fd);font-size:1rem;margin-bottom:.3rem">${el.dataset.us}</div><div style="font-family:var(--fm);font-size:.5rem;color:var(--t3);margin-bottom:.5rem">UK: ${el.dataset.uk}</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:.4rem"><div><span style="font-family:var(--fm);font-size:.5rem;color:var(--us)">US PAY</span><br><strong>$${parseInt(el.dataset.usp).toLocaleString()}</strong></div><div><span style="font-family:var(--fm);font-size:.5rem;color:var(--uk)">UK PAY</span><br><strong>£${parseInt(el.dataset.ukp).toLocaleString()}</strong></div></div><div style="margin-top:.4rem;font-family:var(--fm);font-size:.6rem;color:var(--t3)">Nominal ratio: ${el.dataset.r}x · PPP-adjusted: ${el.dataset.ppp}x</div>`,e.clientX,e.clientY);
-  }));
-  container.querySelectorAll('.br').forEach(el=>{el.addEventListener('mousemove',e=>showTip(tip.innerHTML,e.clientX,e.clientY));el.addEventListener('mouseleave',hideTip);});
-}
+// Currency toggle
+document.querySelectorAll('.curr-btn').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.curr-btn').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  currMode=b.dataset.mode;
+  render();
+}));
 
-const sorted=D.matches.sort((a,b)=>b.r-a.r);
-renderRatios(document.getElementById('ratioChart'),sorted.slice(0,15));
-renderRatios(document.getElementById('ratioMore'),sorted.slice(15));
+// Expand
 document.getElementById('ratioExpand').addEventListener('click',function(){
   const el=document.getElementById('ratioMore');
   el.classList.toggle('open');
-  this.textContent=el.classList.contains('open')?'Show less':'Show all 70 matched roles';
+  this.textContent=el.classList.contains('open')?'Show less':'Show all 70 roles';
 });
 
-// Histogram
-function renderHist(containerId){
-  const el=document.getElementById(containerId);
-  let h='';
-  [{key:'us',label:'🇺🇸 US ($)',data:D.pay_dist.us,step:20000,sym:'$',color:'var(--us)'},{key:'uk',label:'🇬🇧 UK (£)',data:D.pay_dist.uk,step:10000,sym:'£',color:'var(--uk)'}].forEach(c=>{
-    const max=Math.max(...Object.values(c.data));
-    h+=`<div style="flex:1"><div style="font-family:var(--fm);font-size:.6rem;color:var(--t3);margin-bottom:.5rem;letter-spacing:.1em">${c.label}</div><div class="hist-row" style="height:160px;align-items:flex-end">`;
-    const entries=Object.entries(c.data).sort((a,b)=>parseInt(a[0])-parseInt(b[0]));
-    entries.forEach(([band,count])=>{
-      const ht=(count/max)*150;
-      const bk=parseInt(band)/1000;
-      h+=`<div style="flex:1;display:flex;flex-direction:column;align-items:center"><div class="hist-bar" style="height:${ht}px;width:100%;background:${c.color};opacity:0.6" onmouseenter="showTip('<strong>${c.sym}${bk}K–${c.sym}${bk+c.step/1000}K</strong><br>${count} occupations',event.clientX,event.clientY)" onmousemove="showTip(tip.innerHTML,event.clientX,event.clientY)" onmouseleave="hideTip()"></div><div class="hist-label">${bk}K</div></div>`;
+// Job search
+document.getElementById('jobSearch').addEventListener('input',renderJobs);
+document.getElementById('jobCountry').addEventListener('change',renderJobs);
+document.getElementById('jobSort').addEventListener('change',renderJobs);
+}
+
+function render(){
+  const us=D.us, uk=D.uk;
+  const avgR = currMode==='nominal' ? 2.1 : currMode==='exchange' ? 1.65 : 1.45;
+  const ratioLabel = currMode==='nominal' ? 'Raw numbers ($→£), no conversion' : currMode==='exchange' ? 'Converted at $1 = £0.79 market rate' : 'Adjusted for cost of living (OECD PPP)';
+
+  // Headline
+  document.getElementById('ratioHeadline').innerHTML=`<div class="big-num"><span class="big-num-val" style="color:var(--us)">${avgR.toFixed(1)}x</span><span class="big-num-unit">average pay gap · ${ratioLabel}</span></div>`;
+
+  // Hero card
+  const usPay = currMode==='nominal' ? us.avg_pay : convertUS(us.avg_pay);
+  document.getElementById('heroCard').innerHTML=`
+    <div class="vs-side"><div class="vs-flag">🇺🇸</div><div class="vs-label">United States — Avg Pay</div><div class="vs-val">${sym()}${usPay.toLocaleString()}</div><div class="vs-sub">${fN(us.workers)} workers · ${us.occupations} occupations</div></div>
+    <div class="vs-mid">vs</div>
+    <div class="vs-side"><div class="vs-flag">🇬🇧</div><div class="vs-label">United Kingdom — Avg Pay</div><div class="vs-val">£${uk.avg_pay.toLocaleString()}</div><div class="vs-sub">${fN(uk.workers)} workers · ${uk.occupations} occupations</div></div>`;
+
+  // Pay ratios
+  const matches = D.matches.map(m=>{
+    const usP = convertUS(m.us_p);
+    const r = usP / m.uk_p;
+    return {...m, usP, r: Math.round(r*100)/100};
+  }).sort((a,b)=>b.r-a.r);
+
+  function renderBars(el, items){
+    let h='';
+    items.forEach(m=>{
+      const usW=(m.usP/(m.usP+m.uk_p))*100;
+      h+=`<div class="br" onmouseenter="showTip('<strong>${m.us_t}</strong><br><span style=\\'color:var(--t3);font-size:.7rem\\'>UK: ${m.uk_t}</span><br><br>🇺🇸 ${sym()}${m.usP.toLocaleString()}<br>🇬🇧 £${m.uk_p.toLocaleString()}<br><br>Ratio: ${m.r}x',event.clientX,event.clientY)" onmousemove="showTip(tip.innerHTML,event.clientX,event.clientY)" onmouseleave="hideTip()"><div class="br-n">${m.us_t}</div><div class="br-bars"><div class="br-b" style="width:${usW}%;background:var(--us)"></div><div class="br-b" style="width:${100-usW}%;background:var(--uk)"></div></div><div class="br-x" style="color:${m.r>=2?'var(--us)':m.r<=1.2?'var(--green)':'var(--t2)'}">${m.r}x</div><div class="br-v">${sym()}${m.usP.toLocaleString()} vs £${m.uk_p.toLocaleString()}</div></div>`;
     });
-    h+=`</div></div>`;
+    el.innerHTML=h;
+  }
+  renderBars(document.getElementById('ratioChart'), matches.slice(0,15));
+  renderBars(document.getElementById('ratioMore'), matches.slice(15));
+
+  // Percentiles
+  const maxP = convertUS(D.percentiles['95']?.us||D.percentiles['90'].us*1.1);
+  let pctH='';
+  ['5','10','25','50','75','90','95'].forEach(p=>{
+    if(!D.percentiles[p])return;
+    const uv=convertUS(D.percentiles[p].us), kv=D.percentiles[p].uk;
+    const uw=(uv/maxP)*100, kw=(kv/maxP)*100;
+    pctH+=`<div class="pct-r"><div class="pct-l">P${p}</div><div class="pct-bars"><div class="pct-b" style="width:${uw}%;background:var(--us)"></div><div class="pct-b uk" style="width:${kw}%;background:var(--uk)"></div></div><div class="pct-v">${sym()}${uv.toLocaleString()} / £${kv.toLocaleString()}</div><div class="pct-x">${(uv/kv).toFixed(1)}x</div></div>`;
   });
-  el.innerHTML=h;
+  document.getElementById('pctChart').innerHTML=pctH;
+
+  // Top/Bottom/Biggest lists
+  function renderTG(id,usData,ukData,label){
+    const usItems=usData.slice(0,12), ukItems=ukData.slice(0,12);
+    let h='';
+    [['🇺🇸','United States',sym(),usItems,true],['🇬🇧','United Kingdom','£',ukItems,false]].forEach(([flag,name,s,items,isUS])=>{
+      h+=`<div class="tl"><div class="tl-h"><span class="tl-flag">${flag}</span><span class="tl-title">${name} — ${label}</span></div>`;
+      items.forEach((d,i)=>{
+        const pay = isUS ? convertUS(d.p) : d.p;
+        h+=`<div class="ti"><div class="ti-r">${i+1}</div><div class="ti-n">${d.t}</div><div class="ti-v">${s}${pay.toLocaleString()}</div><div class="ti-j">${fN(d.j)}</div></div>`;
+      });
+      h+='</div>';
+    });
+    document.getElementById(id).innerHTML=h;
+  }
+
+  const usJobs=D.us.jobs, ukJobs=D.uk.jobs;
+  renderTG('topGrid',usJobs.sort((a,b)=>b.p-a.p),ukJobs.sort((a,b)=>b.p-a.p),'Highest Paid');
+  renderTG('lowGrid',usJobs.filter(d=>d.p>0).sort((a,b)=>a.p-b.p),ukJobs.filter(d=>d.p>10000).sort((a,b)=>a.p-b.p),'Lowest Paid');
+  renderTG('bigGrid',usJobs.sort((a,b)=>b.j-a.j),ukJobs.sort((a,b)=>b.j-a.j),'Most Workers');
+
+  // Education
+  const maxEdu=D.edu_pay.length?convertUS(D.edu_pay[0].avg):100000;
+  let eduH='';
+  D.edu_pay.forEach(d=>{
+    const v=convertUS(d.avg);
+    eduH+=`<div class="edu-r"><div class="edu-l">${d.edu}</div><div class="edu-track"><div class="edu-fill" style="width:${(v/maxEdu)*100}%;background:var(--us)"></div></div><div class="edu-v">${sym()}${v.toLocaleString()}</div></div>`;
+  });
+  document.getElementById('eduChart').innerHTML=eduH;
+
+  // Growth
+  let grH='';
+  [['🟢 Fastest Growing',D.growth.growing,'var(--green)'],['🔴 Fastest Declining',D.growth.declining,'var(--red)']].forEach(([label,items])=>{
+    grH+=`<div class="tl"><div class="tl-h"><span class="tl-flag">🇺🇸</span><span class="tl-title">${label} (2024–2034)</span></div>`;
+    items.forEach(d=>{
+      const gc=d.o>0?'color:var(--green)':'color:var(--red)';
+      grH+=`<div class="gr"><div class="gr-n">${d.t}</div><div class="gr-o" style="${gc}">${d.o>0?'+':''}${d.o}%</div><div class="gr-p">${sym()}${convertUS(d.p).toLocaleString()}</div><div class="gr-j">${fN(d.j)}</div></div>`;
+    });
+    grH+='</div>';
+  });
+  document.getElementById('growthGrid').innerHTML=grH;
+
+  renderJobs();
 }
-renderHist('histChart');
 
-// Percentiles
-const maxPay=D.percentiles['95']?.us||D.percentiles['90'].us*1.1;
-let pctH='';
-['5','10','25','50','75','90','95'].forEach(p=>{
-  if(!D.percentiles[p])return;
-  const uv=D.percentiles[p].us,kv=D.percentiles[p].uk;
-  const uw=(uv/maxPay)*100,kw=(kv/maxPay)*100;
-  const ratio=(uv/kv).toFixed(1);
-  pctH+=`<div class="pct-r"><div class="pct-l">P${p}</div><div class="pct-bars"><div class="pct-b" style="width:${uw}%;background:var(--us)"></div><div class="pct-b uk" style="width:${kw}%;background:var(--uk)"></div></div><div class="pct-v">$${uv.toLocaleString()} / £${kv.toLocaleString()}</div><div class="pct-x">${ratio}x</div></div>`;
-});
-document.getElementById('pctChart').innerHTML=pctH;
-
-// Top/Bottom lists
-function renderLists(id,data,label){
-  let h='';
-  ['us','uk'].forEach(c=>{
-    const flag=c==='us'?'🇺🇸':'🇬🇧',sym=c==='us'?'$':'£',name=c==='us'?'United States':'United Kingdom';
-    const items=c==='us'?data.us:data.uk;
-    if(!items)return;
-    h+=`<div class="tl"><div class="tl-h"><span class="tl-flag">${flag}</span><span class="tl-title">${name} — ${label}</span></div>`;
-    items.forEach((d,i)=>{h+=`<div class="ti"><div class="ti-r">${i+1}</div><div class="ti-n">${d.t||d.title}</div><div class="ti-v">${sym}${(d.p||d.pay).toLocaleString()}</div><div class="ti-j">${fN(d.j||d.jobs)}</div></div>`;});
-    h+='</div>';
-  });
-  document.getElementById(id).innerHTML=h;
-}
-
-// Build top/bottom from all jobs data
-const usTop=D.us.jobs.sort((a,b)=>b.p-a.p).slice(0,12);
-const ukTop=D.uk.jobs.sort((a,b)=>b.p-a.p).slice(0,12);
-const usLow=D.us.jobs.filter(d=>d.p>0).sort((a,b)=>a.p-b.p).slice(0,12);
-const ukLow=D.uk.jobs.filter(d=>d.p>10000).sort((a,b)=>a.p-b.p).slice(0,12);
-const usBig=D.us.jobs.sort((a,b)=>b.j-a.j).slice(0,12);
-const ukBig=D.uk.jobs.sort((a,b)=>b.j-a.j).slice(0,12);
-
-function renderTG(id,usD,ukD,label){
-  let h='';
-  [['us','🇺🇸','$',usD],['uk','🇬🇧','£',ukD]].forEach(([c,flag,sym,items])=>{
-    h+=`<div class="tl"><div class="tl-h"><span class="tl-flag">${flag}</span><span class="tl-title">${c==='us'?'United States':'United Kingdom'} — ${label}</span></div>`;
-    items.forEach((d,i)=>{h+=`<div class="ti"><div class="ti-r">${i+1}</div><div class="ti-n">${d.t}</div><div class="ti-v">${sym}${d.p.toLocaleString()}</div><div class="ti-j">${fN(d.j)}</div></div>`;});
-    h+='</div>';
-  });
-  document.getElementById(id).innerHTML=h;
-}
-renderTG('topGrid',usTop,ukTop,'Highest Paid');
-renderTG('lowGrid',usLow,ukLow,'Lowest Paid');
-renderTG('bigGrid',usBig,ukBig,'Most Workers');
-
-// Education chart
-const maxEdu=D.edu_pay.length?D.edu_pay[0].avg:100000;
-let eduH='';
-D.edu_pay.forEach(d=>{
-  const w=(d.avg/maxEdu)*100;
-  eduH+=`<div class="edu-r"><div class="edu-l">${d.edu}</div><div class="edu-track"><div class="edu-fill" style="width:${w}%;background:var(--us)"></div></div><div class="edu-v">$${d.avg.toLocaleString()}</div><div class="edu-c">${d.count} jobs</div></div>`;
-});
-document.getElementById('eduChart').innerHTML=eduH;
-
-// Growth
-let grH='';
-[['growing','🟢 Fastest Growing',D.growth.growing,'var(--green)'],['declining','🔴 Fastest Declining',D.growth.declining,'var(--red)']].forEach(([key,label,items,color])=>{
-  grH+=`<div class="tl"><div class="tl-h"><span class="tl-flag">🇺🇸</span><span class="tl-title">${label} (2024–2034)</span></div>`;
-  items.forEach(d=>{
-    const gc=d.o>0?'color:var(--green)':'color:var(--red)';
-    grH+=`<div class="gr"><div class="gr-n">${d.t}</div><div class="gr-o" style="${gc}">${d.o>0?'+':''}${d.o}%</div><div class="gr-p">$${d.p.toLocaleString()}</div><div class="gr-j">${fN(d.j)}</div></div>`;
-  });
-  grH+='</div>';
-});
-document.getElementById('growthGrid').innerHTML=grH;
-
-// All Jobs Explorer
-const allJobs=[
-  ...D.us.jobs.map(d=>({...d,country:'us',sym:'$',flag:'🇺🇸'})),
-  ...D.uk.jobs.map(d=>({...d,country:'uk',sym:'£',flag:'🇬🇧'}))
-];
-
-function renderJobList(){
+function renderJobs(){
   const q=document.getElementById('jobSearch').value.toLowerCase().trim();
-  const cFilter=document.getElementById('jobCountry').value;
+  const cF=document.getElementById('jobCountry').value;
   const sort=document.getElementById('jobSort').value;
-  let filtered=allJobs.filter(d=>{
-    if(cFilter!=='both'&&d.country!==cFilter)return false;
+  const all=[
+    ...D.us.jobs.map(d=>({...d,country:'us',flag:'🇺🇸'})),
+    ...D.uk.jobs.map(d=>({...d,country:'uk',flag:'🇬🇧'}))
+  ];
+  let f=all.filter(d=>{
+    if(cF!=='both'&&d.country!==cF)return false;
     if(q&&!d.t.toLowerCase().includes(q))return false;
     return true;
   });
-  if(sort==='pay-desc')filtered.sort((a,b)=>b.p-a.p);
-  else if(sort==='pay-asc')filtered.sort((a,b)=>a.p-b.p);
-  else if(sort==='jobs-desc')filtered.sort((a,b)=>b.j-a.j);
-  else filtered.sort((a,b)=>a.t.localeCompare(b.t));
-
-  const shown=filtered.slice(0,100);
-  let h=`<div style="padding:.5rem 1.1rem;font-family:var(--fm);font-size:.55rem;color:var(--t3);border-bottom:1px solid var(--bd)">${filtered.length} results${filtered.length>100?' (showing first 100)':''}</div>`;
+  if(sort==='pay-desc')f.sort((a,b)=>b.p-a.p);
+  else if(sort==='pay-asc')f.sort((a,b)=>a.p-b.p);
+  else if(sort==='jobs-desc')f.sort((a,b)=>b.j-a.j);
+  else f.sort((a,b)=>a.t.localeCompare(b.t));
+  const shown=f.slice(0,80);
+  let h=`<div style="padding:.5rem 1.1rem;font-family:var(--fm);font-size:.55rem;color:var(--t3);border-bottom:1px solid var(--bd)">${f.length} results${f.length>80?' (showing 80)':''}</div>`;
   shown.forEach(d=>{
-    h+=`<div class="ti"><div style="font-size:.8rem;width:22px">${d.flag}</div><div class="ti-n">${d.t}</div><div class="ti-v">${d.sym}${d.p.toLocaleString()}</div><div class="ti-j">${fN(d.j)}</div></div>`;
+    const s=d.country==='us'?sym():'£';
+    const pay=d.country==='us'?convertUS(d.p):d.p;
+    h+=`<div class="ti"><div style="font-size:.8rem;width:22px">${d.flag}</div><div class="ti-n">${d.t}</div><div class="ti-v">${s}${pay.toLocaleString()}</div><div class="ti-j">${fN(d.j)}</div></div>`;
   });
   document.getElementById('jobList').innerHTML=h;
 }
-renderJobList();
-document.getElementById('jobSearch').addEventListener('input',renderJobList);
-document.getElementById('jobCountry').addEventListener('change',renderJobList);
-document.getElementById('jobSort').addEventListener('change',renderJobList);
 
-// Section nav highlighting
-const sections=document.querySelectorAll('.sec');
-const navBtns=document.querySelectorAll('.snav-btn');
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      navBtns.forEach(b=>b.classList.remove('on'));
-      const btn=document.querySelector(`.snav-btn[href="#${e.target.id}"]`);
-      if(btn)btn.classList.add('on');
-    }
-  });
-},{threshold:0.2,rootMargin:'-120px 0px -50% 0px'});
-sections.forEach(s=>observer.observe(s));
-}
 init();
 </script>
 </body>
