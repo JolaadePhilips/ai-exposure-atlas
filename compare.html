@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>US vs UK — AI Exposure Atlas</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafaf8; --bg-elevated: #ffffff; --bg-subtle: #f3f3f0;
+  --border: rgba(0,0,0,0.08); --border-strong: rgba(0,0,0,0.12);
+  --text-primary: #1a1a1a; --text-secondary: rgba(26,26,26,0.6); --text-tertiary: rgba(26,26,26,0.35);
+  --accent: #b8860b; --accent-light: rgba(184,134,11,0.08); --accent-border: rgba(184,134,11,0.2);
+  --green: #0f766e; --red: #d03838; --us-color: #4a6fa5; --uk-color: #c0392b;
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04); --shadow-md: 0 4px 16px rgba(0,0,0,0.06); --shadow-lg: 0 12px 40px rgba(0,0,0,0.08);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text-primary); font-family: var(--font-body); }
+body::before { content: ''; position: fixed; inset: 0; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 256px; pointer-events: none; z-index: 9999; }
+
+.top-nav { position: sticky; top: 0; z-index: 90; border-bottom: 1px solid var(--border); backdrop-filter: blur(12px); background: rgba(250,250,248,0.85); }
+[data-theme="dark"] .top-nav { background: rgba(10,10,15,0.85); }
+.top-nav-inner { max-width: 1400px; margin: 0 auto; padding: 0 3rem; display: flex; align-items: center; justify-content: space-between; height: 48px; }
+.top-nav-brand { font-family: var(--font-display); font-size: 1rem; color: var(--text-primary); text-decoration: none; }
+.top-nav-brand em { font-style: italic; color: var(--accent); }
+.top-nav-tabs { display: flex; align-items: center; height: 100%; }
+.top-nav-tab { display: flex; align-items: center; height: 100%; padding: 0 1rem; font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-tertiary); text-decoration: none; border-bottom: 2px solid transparent; transition: all 0.2s; }
+.top-nav-tab:hover { color: var(--text-secondary); }
+.top-nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+.top-nav-right { display: flex; align-items: center; }
+.theme-toggle { width: 34px; height: 34px; background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; transition: all 0.2s; }
+
+[data-theme="dark"] { --bg: #0a0a0f; --bg-elevated: #14141e; --bg-subtle: #1e1e2a; --border: rgba(255,255,255,0.07); --border-strong: rgba(255,255,255,0.12); --text-primary: #e8e6e1; --text-secondary: rgba(232,230,225,0.55); --text-tertiary: rgba(232,230,225,0.3); --accent: #f0c674; --accent-light: rgba(240,198,116,0.1); --shadow-sm: 0 1px 3px rgba(0,0,0,0.2); --shadow-md: 0 4px 16px rgba(0,0,0,0.3); --shadow-lg: 0 12px 40px rgba(0,0,0,0.4); --us-color: #6b8fc4; --uk-color: #e05555; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 3rem 3rem 6rem; }
+
+.page-header { margin-bottom: 2.5rem; animation: fadeUp 0.8s ease-out; }
+.page-eyebrow { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+.page-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 400; line-height: 1.1; margin-bottom: 0.5rem; }
+.page-title em { font-style: italic; color: var(--accent); }
+.page-desc { font-size: 0.95rem; font-weight: 300; color: var(--text-secondary); max-width: 600px; line-height: 1.6; }
+
+/* Summary stats */
+.summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 3rem; box-shadow: var(--shadow-md); animation: fadeUp 0.8s ease-out 0.1s both; }
+.summary-stat { background: var(--bg-elevated); padding: 1.5rem 1.25rem; }
+.summary-val { font-family: var(--font-display); font-size: 2rem; line-height: 1; margin-bottom: 0.2rem; }
+.summary-label { font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-tertiary); }
+
+/* Scatter plot */
+.scatter-section { margin-bottom: 3rem; animation: fadeUp 0.8s ease-out 0.2s both; }
+.scatter-card { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-md); }
+.scatter-header { padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); background: var(--bg-subtle); display: flex; align-items: center; justify-content: space-between; }
+.scatter-title { font-family: var(--font-display); font-size: 1.2rem; }
+.scatter-legend { display: flex; gap: 1.5rem; }
+.scatter-legend-item { display: flex; align-items: center; gap: 0.35rem; font-family: var(--font-mono); font-size: 0.6rem; color: var(--text-tertiary); }
+.scatter-legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+.scatter-body { padding: 0; }
+.scatter-body svg { display: block; }
+.scatter-dot { cursor: pointer; transition: opacity 0.2s; }
+.scatter-dot:hover { stroke-width: 2; }
+
+/* Table */
+.table-section { animation: fadeUp 0.8s ease-out 0.3s both; }
+.table-card { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow-md); }
+.table-header { padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); background: var(--bg-subtle); display: flex; align-items: center; justify-content: space-between; }
+.table-title { font-family: var(--font-display); font-size: 1.2rem; }
+.table-controls { display: flex; gap: 0.5rem; }
+.table-sort-btn { padding: 0.35rem 0.7rem; background: none; border: 1px solid var(--border); border-radius: 6px; font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); cursor: pointer; transition: all 0.2s; }
+.table-sort-btn:hover { color: var(--text-secondary); }
+.table-sort-btn.active { background: var(--accent-light); border-color: var(--accent-border); color: var(--accent); }
+.table-scroll { max-height: 600px; overflow-y: auto; }
+
+.trow { display: grid; grid-template-columns: 1fr 60px 60px 45px 90px 90px; align-items: center; padding: 0.6rem 1.5rem; border-bottom: 1px solid var(--border); transition: background 0.1s; }
+.trow:hover { background: var(--bg-subtle); }
+.trow-header { background: var(--bg-subtle); position: sticky; top: 0; z-index: 2; font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-tertiary); border-bottom: 2px solid var(--border); padding: 0.5rem 1.5rem; }
+
+.trow-title { display: flex; flex-direction: column; gap: 0.1rem; min-width: 0; }
+.trow-us-name { font-size: 0.78rem; font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.trow-uk-name { font-size: 0.65rem; color: var(--text-tertiary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.trow-score { font-family: var(--font-mono); font-size: 0.8rem; text-align: center; }
+.trow-diff { font-family: var(--font-mono); font-size: 0.7rem; text-align: center; font-weight: 500; }
+.trow-pay { font-family: var(--font-mono); font-size: 0.68rem; text-align: right; color: var(--text-secondary); }
+
+.diff-pos { color: var(--us-color); }
+.diff-neg { color: var(--uk-color); }
+.diff-zero { color: var(--text-tertiary); }
+
+/* Exposure bars inline */
+.score-bar { display: flex; align-items: center; gap: 0.3rem; }
+.score-bar-track { width: 32px; height: 5px; background: var(--bg-subtle); border-radius: 3px; overflow: hidden; }
+.score-bar-fill { height: 100%; border-radius: 3px; }
+
+/* Tooltip */
+.tooltip { position: fixed; pointer-events: none; z-index: 1000; background: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 10px; padding: 1rem 1.2rem; min-width: 300px; max-width: 400px; box-shadow: var(--shadow-lg); opacity: 0; transform: translateY(6px); transition: opacity 0.15s, transform 0.15s; }
+.tooltip.visible { opacity: 1; transform: translateY(0); }
+
+.footer { max-width: 1200px; margin: 0 auto; padding: 1.5rem 3rem; display: flex; justify-content: space-between; border-top: 1px solid var(--border); font-size: 0.7rem; color: var(--text-tertiary); }
+.footer a { color: var(--accent); text-decoration: none; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 3px; }
+[data-theme="dark"] ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); }
+
+@media (max-width: 768px) {
+  .container { padding: 2rem 1.25rem 4rem; }
+  .summary-grid { grid-template-columns: 1fr 1fr; }
+  .trow { grid-template-columns: 1fr 50px 50px 40px; }
+  .trow-pay { display: none; }
+  .top-nav-inner { padding: 0 1rem; }
+}
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <a href="./" class="top-nav-brand">AI Exposure <em>Atlas</em></a>
+    <div class="top-nav-tabs">
+      <a href="./" class="top-nav-tab">US</a>
+      <a href="./uk/" class="top-nav-tab">UK</a>
+      <a href="./compare.html" class="top-nav-tab active">US vs UK</a>
+      <a href="./methodology.html" class="top-nav-tab">Methodology</a>
+    </div>
+    <div class="top-nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="page-header">
+    <div class="page-eyebrow">Cross-Border Comparison</div>
+    <div class="page-title">US <em>vs</em> UK</div>
+    <p class="page-desc">76 matched occupations compared across borders — same jobs, different economies. How do AI exposure scores, pay, and employment differ between the United States and the United Kingdom?</p>
+  </div>
+
+  <div class="summary-grid" id="summaryGrid"></div>
+
+  <div class="scatter-section">
+    <div class="scatter-card">
+      <div class="scatter-header">
+        <div class="scatter-title">Exposure: US vs UK</div>
+        <div class="scatter-legend">
+          <div class="scatter-legend-item"><div class="scatter-legend-dot" style="background:var(--us-color)"></div> US score higher</div>
+          <div class="scatter-legend-item"><div class="scatter-legend-dot" style="background:var(--uk-color)"></div> UK score higher</div>
+          <div class="scatter-legend-item"><div class="scatter-legend-dot" style="background:var(--text-tertiary)"></div> Same score</div>
+        </div>
+      </div>
+      <div class="scatter-body" id="scatterBody"></div>
+    </div>
+  </div>
+
+  <div class="table-section">
+    <div class="table-card">
+      <div class="table-header">
+        <div class="table-title">All 76 Matched Occupations</div>
+        <div class="table-controls">
+          <button class="table-sort-btn active" data-sort="alpha">A–Z</button>
+          <button class="table-sort-btn" data-sort="diff">Biggest Diff</button>
+          <button class="table-sort-btn" data-sort="us-high">US Highest</button>
+          <button class="table-sort-btn" data-sort="uk-high">UK Highest</button>
+          <button class="table-sort-btn" data-sort="pay-gap">Pay Gap</button>
+        </div>
+      </div>
+      <div class="trow trow-header">
+        <span>Occupation</span><span style="text-align:center">US</span><span style="text-align:center">UK</span><span style="text-align:center">Diff</span><span style="text-align:right">US Pay</span><span style="text-align:right">UK Pay</span>
+      </div>
+      <div class="table-scroll" id="tableBody"></div>
+    </div>
+  </div>
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<div class="footer">
+  <span>Data: <a href="https://www.bls.gov/ooh/">BLS</a> &middot; <a href="https://www.ons.gov.uk/">ONS</a> &middot; <a href="https://www.nomisweb.co.uk/">NOMIS</a></span>
+  <span>2026 &middot; AI Exposure Atlas</span>
+</div>
+
+<script>
+// Theme
+(function(){const s=localStorage.getItem('ai-atlas-theme');document.documentElement.setAttribute('data-theme',s||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'));const b=document.getElementById('themeToggle');function u(){b.textContent=document.documentElement.getAttribute('data-theme')==='dark'?'☀️':'🌙';}u();b.addEventListener('click',()=>{const n=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('ai-atlas-theme',n);u();});})();
+
+let DATA=[];
+let sortMode='alpha';
+
+function eC(s){return['#0f766e','#14967e','#22a88a','#3db87a','#6ec45e','#a8b830','#d09820','#dc7820','#dc5530','#d03838','#b82020'][Math.round(Math.max(0,Math.min(10,s)))];}
+function fP(v,sym){if(!v||v<=0)return'N/A';return sym+v.toLocaleString();}
+
+const tooltip=document.getElementById('tooltip');
+function showT(d,x,y){
+  const usC=eC(d.us_exposure),ukC=eC(d.uk_exposure);
+  tooltip.innerHTML=`<div style="font-family:var(--font-display);font-size:1.1rem;margin-bottom:0.5rem">${d.us_title}</div>
+    <div style="font-family:var(--font-mono);font-size:0.5rem;color:var(--text-tertiary);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.6rem">UK: ${d.uk_title}</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-bottom:0.5rem">
+      <div><div style="font-family:var(--font-mono);font-size:0.5rem;color:var(--us-color);letter-spacing:0.1em">US SCORE</div><div style="font-family:var(--font-display);font-size:1.6rem;color:${usC}">${d.us_exposure}</div></div>
+      <div><div style="font-family:var(--font-mono);font-size:0.5rem;color:var(--uk-color);letter-spacing:0.1em">UK SCORE</div><div style="font-family:var(--font-display);font-size:1.6rem;color:${ukC}">${d.uk_exposure}</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem">
+      <div><span style="font-family:var(--font-mono);font-size:0.5rem;color:var(--text-tertiary)">US PAY</span><br><span style="font-size:0.85rem">${fP(d.us_pay,'$')}</span></div>
+      <div><span style="font-family:var(--font-mono);font-size:0.5rem;color:var(--text-tertiary)">UK PAY</span><br><span style="font-size:0.85rem">${fP(d.uk_pay,'£')}</span></div>
+    </div>`;
+  let l=x+16,t=y-10;if(l+400>window.innerWidth)l=x-410;if(t<10)t=10;
+  tooltip.style.left=l+'px';tooltip.style.top=t+'px';tooltip.classList.add('visible');
+}
+function hideT(){tooltip.classList.remove('visible');}
+
+function renderSummary(){
+  const avgUS=DATA.reduce((s,d)=>s+d.us_exposure,0)/DATA.length;
+  const avgUK=DATA.reduce((s,d)=>s+d.uk_exposure,0)/DATA.length;
+  const sameCount=DATA.filter(d=>d.diff===0).length;
+  const avgPayRatio=DATA.filter(d=>d.us_pay>0&&d.uk_pay>0).reduce((s,d)=>s+(d.us_pay/d.uk_pay),0)/DATA.filter(d=>d.us_pay>0&&d.uk_pay>0).length;
+  document.getElementById('summaryGrid').innerHTML=`
+    <div class="summary-stat"><div class="summary-val">${DATA.length}</div><div class="summary-label">Matched Pairs</div></div>
+    <div class="summary-stat"><div class="summary-val" style="color:var(--us-color)">${avgUS.toFixed(1)}</div><div class="summary-label">Avg US Score</div></div>
+    <div class="summary-stat"><div class="summary-val" style="color:var(--uk-color)">${avgUK.toFixed(1)}</div><div class="summary-label">Avg UK Score</div></div>
+    <div class="summary-stat"><div class="summary-val">${avgPayRatio.toFixed(1)}x</div><div class="summary-label">Avg US/UK Pay Ratio</div></div>`;
+}
+
+function renderScatter(){
+  const el=document.getElementById('scatterBody');
+  const w=el.parentElement.getBoundingClientRect().width;
+  const h=Math.min(500, w*0.55);
+  const m={top:30,right:30,bottom:45,left:45};
+  const x=d3.scaleLinear().domain([-0.5,10.5]).range([m.left,w-m.right]);
+  const y=d3.scaleLinear().domain([-0.5,10.5]).range([h-m.bottom,m.top]);
+
+  let svg=`<svg width="${w}" height="${h}">`;
+  // Diagonal line (equal scores)
+  svg+=`<line x1="${x(0)}" y1="${y(0)}" x2="${x(10)}" y2="${y(10)}" stroke="var(--border-strong)" stroke-dasharray="4,3" opacity="0.5"/>`;
+  // Grid
+  for(let i=0;i<=10;i+=2){
+    svg+=`<line x1="${m.left}" y1="${y(i)}" x2="${w-m.right}" y2="${y(i)}" stroke="var(--border)" />`;
+    svg+=`<line x1="${x(i)}" y1="${m.top}" x2="${x(i)}" y2="${h-m.bottom}" stroke="var(--border)" />`;
+    svg+=`<text x="${x(i)}" y="${h-m.bottom+16}" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="var(--text-tertiary)">${i}</text>`;
+    svg+=`<text x="${m.left-8}" y="${y(i)+4}" text-anchor="end" font-family="var(--font-mono)" font-size="10" fill="var(--text-tertiary)">${i}</text>`;
+  }
+  // Labels
+  svg+=`<text x="${w/2}" y="${h-4}" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="var(--text-tertiary)" letter-spacing="0.1em">US EXPOSURE SCORE →</text>`;
+  svg+=`<text x="12" y="${h/2}" text-anchor="middle" font-family="var(--font-mono)" font-size="10" fill="var(--text-tertiary)" letter-spacing="0.1em" transform="rotate(-90,12,${h/2})">UK EXPOSURE SCORE →</text>`;
+  // Zone labels
+  svg+=`<text x="${x(8.5)}" y="${y(3)}" text-anchor="middle" font-family="var(--font-display)" font-size="11" fill="var(--us-color)" opacity="0.3">US scores higher</text>`;
+  svg+=`<text x="${x(2.5)}" y="${y(8)}" text-anchor="middle" font-family="var(--font-display)" font-size="11" fill="var(--uk-color)" opacity="0.3">UK scores higher</text>`;
+
+  // Dots with jitter for overlapping points
+  const jitter={};
+  DATA.forEach(d=>{
+    const key=d.us_exposure+','+d.uk_exposure;
+    jitter[key]=(jitter[key]||0)+1;
+    const j=(jitter[key]-1)*4;
+    const cx=x(d.us_exposure)+j*Math.cos(jitter[key]);
+    const cy=y(d.uk_exposure)+j*Math.sin(jitter[key]);
+    const color=d.diff>0?'var(--us-color)':d.diff<0?'var(--uk-color)':'var(--text-tertiary)';
+    const r=Math.max(5,Math.min(12,Math.sqrt((d.us_jobs+d.uk_jobs)/50000)));
+    svg+=`<circle class="scatter-dot" data-idx="${DATA.indexOf(d)}" cx="${cx}" cy="${cy}" r="${r}" fill="${color}" opacity="0.65" stroke="${color}"/>`;
+  });
+  svg+='</svg>';
+  el.innerHTML=svg;
+
+  el.querySelectorAll('.scatter-dot').forEach(dot=>{
+    const d=DATA[parseInt(dot.dataset.idx)];
+    dot.addEventListener('mouseenter',e=>showT(d,e.clientX,e.clientY));
+    dot.addEventListener('mousemove',e=>showT(d,e.clientX,e.clientY));
+    dot.addEventListener('mouseleave',hideT);
+  });
+}
+
+function renderTable(){
+  const sorted=[...DATA];
+  if(sortMode==='alpha') sorted.sort((a,b)=>a.us_title.localeCompare(b.us_title));
+  else if(sortMode==='diff') sorted.sort((a,b)=>Math.abs(b.diff)-Math.abs(a.diff));
+  else if(sortMode==='us-high') sorted.sort((a,b)=>b.us_exposure-a.us_exposure);
+  else if(sortMode==='uk-high') sorted.sort((a,b)=>b.uk_exposure-a.uk_exposure);
+  else if(sortMode==='pay-gap') sorted.sort((a,b)=>{const ag=a.us_pay&&a.uk_pay?a.us_pay-a.uk_pay:0;const bg=b.us_pay&&b.uk_pay?b.us_pay-b.uk_pay:0;return bg-ag;});
+
+  let html='';
+  sorted.forEach(d=>{
+    const diffCls=d.diff>0?'diff-pos':d.diff<0?'diff-neg':'diff-zero';
+    const diffStr=d.diff>0?`+${d.diff}`:d.diff<0?`${d.diff}`:'=';
+    html+=`<div class="trow">
+      <div class="trow-title"><span class="trow-us-name">${d.us_title}</span><span class="trow-uk-name">UK: ${d.uk_title}</span></div>
+      <div class="score-bar"><div class="score-bar-track"><div class="score-bar-fill" style="width:${d.us_exposure*10}%;background:${eC(d.us_exposure)}"></div></div><span class="trow-score" style="color:${eC(d.us_exposure)}">${d.us_exposure}</span></div>
+      <div class="score-bar"><div class="score-bar-track"><div class="score-bar-fill" style="width:${d.uk_exposure*10}%;background:${eC(d.uk_exposure)}"></div></div><span class="trow-score" style="color:${eC(d.uk_exposure)}">${d.uk_exposure}</span></div>
+      <div class="trow-diff ${diffCls}">${diffStr}</div>
+      <div class="trow-pay">${fP(d.us_pay,'$')}</div>
+      <div class="trow-pay">${fP(d.uk_pay,'£')}</div>
+    </div>`;
+  });
+  document.getElementById('tableBody').innerHTML=html;
+}
+
+async function init(){
+  const res=await fetch('compare-data.json');
+  DATA=await res.json();
+  renderSummary();
+  renderScatter();
+  renderTable();
+
+  document.querySelectorAll('.table-sort-btn').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('.table-sort-btn').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    sortMode=b.dataset.sort;
+    renderTable();
+  }));
+
+  window.addEventListener('resize',()=>renderScatter());
+}
+init();
+</script>
+</body>
+</html>
