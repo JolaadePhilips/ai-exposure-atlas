@@ -142,6 +142,43 @@ body::before{content:'';position:fixed;inset:0;opacity:.03;background-image:url(
 .job-input{flex:1;min-width:200px;padding:.55rem .9rem;background:var(--bg-e);border:1px solid var(--bd);border-radius:8px;color:var(--t1);font-family:var(--fb);font-size:.82rem;outline:none}
 .job-select{padding:.55rem .9rem;background:var(--bg-e);border:1px solid var(--bd);border-radius:8px;color:var(--t1);font-family:var(--fb);font-size:.82rem;outline:none;cursor:pointer}
 
+/* Waffle chart */
+.waffle{display:grid;grid-template-columns:repeat(10,1fr);gap:3px;width:200px;margin:1rem 0}
+.waffle-cell{aspect-ratio:1;background:var(--bg-s);border-radius:2px;transition:background .4s ease}
+
+/* Count-up */
+.count-up{font-family:var(--fd);font-variant-numeric:tabular-nums}
+
+/* Salary input */
+.salary-box{background:var(--bg-e);border:1px solid var(--bd);border-radius:14px;padding:1.5rem;box-shadow:var(--ss);margin:1.5rem 0}
+.salary-input{width:100%;padding:.7rem 1rem .7rem 2rem;background:var(--bg-s);border:2px solid var(--bd);border-radius:10px;font-family:var(--fb);font-size:1.2rem;font-weight:300;color:var(--t1);outline:none;transition:border-color .2s}
+.salary-input:focus{border-color:var(--ac)}
+.salary-result{margin-top:1rem;display:none}
+.salary-result.vis{display:block;animation:fu .4s ease-out}
+.salary-pct-bar{height:12px;background:var(--bg-s);border-radius:6px;overflow:hidden;margin:.5rem 0}
+.salary-pct-fill{height:100%;border-radius:6px;transition:width .6s cubic-bezier(.16,1,.3,1)}
+
+/* Detail sidebar */
+.detail-side{position:fixed;top:0;right:0;width:420px;max-width:90vw;height:100%;background:var(--bg-e);border-left:1px solid var(--bd);z-index:200;transform:translateX(100%);transition:transform .35s cubic-bezier(.16,1,.3,1);overflow-y:auto;box-shadow:-8px 0 40px rgba(0,0,0,.08);padding:2rem}
+.detail-side.open{transform:translateX(0)}
+.detail-backdrop{position:fixed;inset:0;z-index:199;background:rgba(0,0,0,.15);backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .3s}
+.detail-backdrop.open{opacity:1;pointer-events:all}
+.ds-close{position:absolute;top:1rem;right:1rem;width:32px;height:32px;background:var(--bg-s);border:1px solid var(--bd);border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--t2);transition:all .2s}
+.ds-close:hover{background:var(--bd2);color:var(--t1)}
+.ds-title{font-family:var(--fd);font-size:1.5rem;margin-bottom:.2rem;padding-right:2rem}
+.ds-sub{font-family:var(--fm);font-size:.55rem;color:var(--t3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.25rem}
+.ds-stats{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:1.25rem}
+.ds-stat{background:var(--bg-s);border-radius:8px;padding:.7rem}
+.ds-stat-v{font-family:var(--fd);font-size:1.2rem;line-height:1}
+.ds-stat-l{font-family:var(--fm);font-size:.45rem;letter-spacing:.15em;text-transform:uppercase;color:var(--t3)}
+.ds-text{font-size:.85rem;font-weight:300;line-height:1.65;color:var(--t2)}
+
+/* Make bar rows clickable */
+.br.clickable{cursor:pointer}
+.br.clickable:hover{background:var(--acl)}
+.ti.clickable{cursor:pointer}
+.ti.clickable:hover{background:var(--acl)}
+
 /* Tooltip */
 .tip{position:fixed;pointer-events:none;z-index:1000;background:var(--bg-e);border:1px solid var(--bd2);border-radius:10px;padding:.85rem 1rem;min-width:240px;max-width:360px;box-shadow:0 12px 40px rgba(0,0,0,.1);opacity:0;transform:translateY(6px);transition:opacity .15s,transform .15s;font-size:.8rem}
 .tip.vis{opacity:1;transform:translateY(0)}
@@ -187,6 +224,12 @@ body::before{content:'';position:fixed;inset:0;opacity:.03;background-image:url(
   </div>
 
   <div class="vs-card" id="heroCard"></div>
+
+  <p class="story-p">That's <strong>143 million</strong> American workers vs <strong>33 million</strong> British — about 1 in 3 people in each country. Here's what that looks like:</p>
+  <div style="display:flex;gap:2rem;align-items:flex-start;flex-wrap:wrap">
+    <div><div style="font-family:var(--fm);font-size:.55rem;color:var(--us);letter-spacing:.15em;margin-bottom:.3rem">🇺🇸 US WORKFORCE</div><div class="waffle" id="waffleUS"></div><div style="font-family:var(--fm);font-size:.5rem;color:var(--t3)">Each square = ~1.4 million workers</div></div>
+    <div><div style="font-family:var(--fm);font-size:.55rem;color:var(--uk);letter-spacing:.15em;margin-bottom:.3rem">🇬🇧 UK WORKFORCE</div><div class="waffle" id="waffleUK"></div><div style="font-family:var(--fm);font-size:.5rem;color:var(--t3)">Each square = ~330,000 workers</div></div>
+  </div>
 </div>
 
 <!-- ═══ CHAPTER 2: WHERE THE GAP IS BIGGEST ═══ -->
@@ -209,6 +252,7 @@ body::before{content:'';position:fixed;inset:0;opacity:.03;background-image:url(
   <div class="story-num">03</div>
   <div class="story-h">The richer you are, the <em>wider</em> the gap</div>
   <p class="story-p">At the bottom of the pay scale (10th percentile), Americans earn 1.7x more. But at the top (90th percentile), it's <strong>2.4x</strong>. The Atlantic pay gap isn't just about averages — it accelerates as you move up.</p>
+  <p class="story-p">Think of it this way: a low-earning American worker gets an extra <strong>£16K</strong> per year compared to their British counterpart. A high-earning American gets an extra <strong>£73K</strong>. Same gap in principle, wildly different in impact.</p>
 
   <details class="explain">
     <summary>What are percentiles?</summary>
@@ -258,7 +302,8 @@ body::before{content:'';position:fixed;inset:0;opacity:.03;background-image:url(
 <div class="story" id="s6">
   <div class="story-num">06</div>
   <div class="story-h">Two countries, <em>very different</em> workforces</div>
-  <p class="story-p">The US workforce is <strong>4.3x larger</strong> (143 million vs 33 million). But size aside, the <em>composition</em> tells a story about each society.</p>
+  <p class="story-p">The US workforce is <strong>4.3x larger</strong> (143 million vs 33 million). If the UK workforce was a single city, it would be roughly the size of Tokyo. The US workforce would be larger than the entire population of Japan.</p>
+  <p class="story-p">But size aside, the <em>composition</em> tells a story about each society.</p>
 
   <div class="dyk">
     <div class="dyk-label">The story in the numbers</div>
@@ -299,9 +344,23 @@ body::before{content:'';position:fixed;inset:0;opacity:.03;background-image:url(
   <div class="tg" id="growthGrid"></div>
 </div>
 
-<!-- ═══ CHAPTER 9: FIND YOUR JOB ═══ -->
+<!-- ═══ CHAPTER 9: WHERE DO YOU RANK? ═══ -->
 <div class="story" id="s9">
   <div class="story-num">09</div>
+  <div class="story-h">Where do <em>you</em> rank?</div>
+  <p class="story-p">Enter your annual salary to see how it compares to every occupation in both countries.</p>
+  <div class="salary-box">
+    <div style="display:flex;gap:.5rem;margin-bottom:.5rem">
+      <select id="salaryCountry" class="job-select" style="width:auto"><option value="us">🇺🇸 US ($)</option><option value="uk">🇬🇧 UK (£)</option></select>
+      <div style="position:relative;flex:1"><span style="position:absolute;left:.8rem;top:50%;transform:translateY(-50%);font-size:1.1rem;color:var(--t3)" id="salSym">$</span><input type="number" class="salary-input" id="salaryInput" placeholder="Enter your annual salary..." style="padding-left:1.6rem"></div>
+    </div>
+    <div class="salary-result" id="salaryResult"></div>
+  </div>
+</div>
+
+<!-- ═══ CHAPTER 10: FIND YOUR JOB ═══ -->
+<div class="story" id="s10">
+  <div class="story-num">10</div>
   <div class="story-h">Find <em>any job</em> in either country</div>
   <p class="story-p">Search across all 700+ occupations. Filter by country. Sort by pay, workforce size, or alphabetically.</p>
 
@@ -315,6 +374,8 @@ body::before{content:'';position:fixed;inset:0;opacity:.03;background-image:url(
 
 </div>
 
+<div class="detail-backdrop" id="detailBg"></div>
+<div class="detail-side" id="detailSide"></div>
 <div class="tip" id="tip"></div>
 
 <div class="ft"><span>Data: <a href="https://www.bls.gov/ooh/">BLS</a> · <a href="https://www.ons.gov.uk/">ONS ASHE 2025</a> · <a href="https://www.nomisweb.co.uk/">NOMIS</a> · Exchange: $1 = £0.79 · PPP: $1 = £0.69 (OECD 2024)</span><span>2026 · AI Exposure Atlas</span></div>
@@ -349,6 +410,87 @@ const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.targ
 document.querySelectorAll('.story').forEach(s=>obs.observe(s));
 
 render();
+
+// Waffle charts
+function renderWaffle(id, filledPct, color){
+  const el=document.getElementById(id);
+  let h='';
+  for(let i=0;i<100;i++){
+    const filled=i<filledPct;
+    h+=`<div class="waffle-cell" style="background:${filled?color:'var(--bg-s)'}; transition-delay:${i*15}ms"></div>`;
+  }
+  el.innerHTML=h;
+}
+renderWaffle('waffleUS',100,'var(--us)');
+renderWaffle('waffleUK',Math.round(D.uk.workers/D.us.workers*100),'var(--uk)');
+
+// Count-up animations
+function countUp(el,target,dur=1200,prefix='',suffix=''){
+  const start=performance.now();const isF=String(target).includes('.');
+  function tick(now){const p=Math.min((now-start)/dur,1);const e=1-Math.pow(1-p,3);const c=e*target;
+  el.textContent=prefix+(isF?c.toFixed(1):Math.floor(c).toLocaleString())+suffix;
+  if(p<1)requestAnimationFrame(tick);}requestAnimationFrame(tick);}
+
+const countObs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting&&!x.target.dataset.counted){
+  x.target.dataset.counted='1';
+  countUp(x.target,parseFloat(x.target.dataset.target),1200,x.target.dataset.prefix||'',x.target.dataset.suffix||'');
+}});},{threshold:.3});
+document.querySelectorAll('.count-up[data-target]').forEach(el=>countObs.observe(el));
+
+// Detail sidebar
+const detailSide=document.getElementById('detailSide');
+const detailBg=document.getElementById('detailBg');
+function openDetail(title,country,pay,jobs,extra){
+  const flag=country==='us'?'🇺🇸':'🇬🇧';
+  const s=country==='us'?sym():'£';
+  const payVal=country==='us'?convertUS(pay):pay;
+  detailSide.innerHTML=`<button class="ds-close" id="dsClose">&times;</button>
+    <div style="font-size:1.5rem;margin-bottom:.3rem">${flag}</div>
+    <div class="ds-title">${title}</div>
+    <div class="ds-sub">${country==='us'?'United States':'United Kingdom'}</div>
+    <div class="ds-stats">
+      <div class="ds-stat"><div class="ds-stat-v">${s}${payVal.toLocaleString()}</div><div class="ds-stat-l">${currMode==='nominal'?'Median Pay':'Pay ('+currMode+')'}</div></div>
+      <div class="ds-stat"><div class="ds-stat-v">${fN(jobs)}</div><div class="ds-stat-l">Workers</div></div>
+    </div>
+    ${extra||''}
+    <div style="margin-top:1rem">
+      <div style="font-family:var(--fm);font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--t3);margin-bottom:.4rem">How this compares</div>
+      <div class="ds-text">${pay>0?`This occupation pays ${payVal>=(country==='us'?convertUS(D.us.median_pay):D.uk.median_pay)?'above':'below'} the national median (${s}${(country==='us'?convertUS(D.us.median_pay):D.uk.median_pay).toLocaleString()}).`:'Pay data not available.'} ${jobs>0?`It employs ${fN(jobs)} people — that's about ${(jobs/(country==='us'?D.us.workers:D.uk.workers)*100).toFixed(2)}% of the ${country==='us'?'US':'UK'} workforce.`:''}</div>
+    </div>`;
+  detailSide.classList.add('open');
+  detailBg.classList.add('open');
+  document.getElementById('dsClose').addEventListener('click',closeDetail);
+  detailBg.addEventListener('click',closeDetail);
+}
+function closeDetail(){detailSide.classList.remove('open');detailBg.classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDetail();});
+
+// Salary ranking
+const salInput=document.getElementById('salaryInput');
+const salCountry=document.getElementById('salaryCountry');
+const salSym=document.getElementById('salSym');
+salCountry.addEventListener('change',()=>{salSym.textContent=salCountry.value==='us'?'$':'£';salInput.dispatchEvent(new Event('input'));});
+salInput.addEventListener('input',()=>{
+  const v=parseFloat(salInput.value);
+  const c=salCountry.value;
+  const res=document.getElementById('salaryResult');
+  if(!v||v<=0){res.classList.remove('vis');return;}
+  const jobs=c==='us'?D.us.jobs:D.uk.jobs;
+  const s=c==='us'?'$':'£';
+  const below=jobs.filter(d=>d.p>0&&d.p<v).length;
+  const total=jobs.filter(d=>d.p>0).length;
+  const pct=Math.round(below/total*100);
+  const above=total-below;
+  const closest=jobs.filter(d=>d.p>0).sort((a,b)=>Math.abs(a.p-v)-Math.abs(b.p-v)).slice(0,3);
+  res.innerHTML=`
+    <div style="font-family:var(--fd);font-size:1.8rem;margin-bottom:.3rem">You earn more than <span style="color:var(--ac)">${pct}%</span> of ${c==='us'?'US':'UK'} occupations</div>
+    <div class="salary-pct-bar"><div class="salary-pct-fill" style="width:${pct}%;background:var(--ac)"></div></div>
+    <div style="font-size:.82rem;font-weight:300;color:var(--t2);margin-bottom:1rem">${below} occupations pay less than ${s}${v.toLocaleString()} · ${above} pay more</div>
+    <div style="font-family:var(--fm);font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--t3);margin-bottom:.4rem">Closest occupations to your salary</div>
+    ${closest.map(d=>`<div class="ti clickable" onclick="openDetail('${d.t.replace(/'/g,"\\'")}','${c}',${d.p},${d.j})"><div class="ti-n">${d.t}</div><div class="ti-v">${s}${d.p.toLocaleString()}</div><div class="ti-j">${fN(d.j)}</div></div>`).join('')}
+  `;
+  res.classList.add('vis');
+});
 
 // Currency toggle
 document.querySelectorAll('.curr-btn').forEach(b=>b.addEventListener('click',()=>{
@@ -423,11 +565,13 @@ function render(){
       h+=`<div class="tl"><div class="tl-h"><span class="tl-flag">${flag}</span><span class="tl-title">${name} — ${label}</span></div>`;
       items.forEach((d,i)=>{
         const pay = isUS ? convertUS(d.p) : d.p;
-        h+=`<div class="ti"><div class="ti-r">${i+1}</div><div class="ti-n">${d.t}</div><div class="ti-v">${s}${pay.toLocaleString()}</div><div class="ti-j">${fN(d.j)}</div></div>`;
+        h+=`<div class="ti clickable" data-title="${d.t.replace(/"/g,'&quot;')}" data-country="${c}" data-pay="${d.p}" data-jobs="${d.j}"><div class="ti-r">${i+1}</div><div class="ti-n">${d.t}</div><div class="ti-v">${s}${pay.toLocaleString()}</div><div class="ti-j">${fN(d.j)}</div></div>`;
       });
       h+='</div>';
     });
     document.getElementById(id).innerHTML=h;
+    // Make clickable
+    document.getElementById(id).querySelectorAll('.ti.clickable').forEach(el=>el.addEventListener('click',()=>openDetail(el.dataset.title,el.dataset.country,+el.dataset.pay,+el.dataset.jobs)));
   }
 
   const usJobs=D.us.jobs, ukJobs=D.uk.jobs;
