@@ -20,9 +20,17 @@
 html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
 body { background: var(--bg); color: var(--text-primary); font-family: var(--font-body); line-height: 1.7; }
 
-.container { max-width: 780px; margin: 0 auto; padding: 4rem 2rem 6rem; }
+/* Top Nav */
+.top-nav { position: sticky; top: 0; z-index: 90; border-bottom: 1px solid var(--border); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); background: rgba(250,250,248,0.85); }
+.top-nav-inner { max-width: 1400px; margin: 0 auto; padding: 0 3rem; display: flex; align-items: center; justify-content: space-between; height: 48px; }
+.top-nav-brand { font-family: var(--font-display); font-size: 1rem; color: var(--text-primary); text-decoration: none; display: flex; align-items: baseline; gap: 0.4rem; }
+.top-nav-brand em { font-style: italic; color: var(--accent); }
+.top-nav-tabs { display: flex; align-items: center; gap: 0; height: 100%; }
+.top-nav-tab { display: flex; align-items: center; height: 100%; padding: 0 1rem; font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-tertiary); text-decoration: none; border-bottom: 2px solid transparent; transition: all 0.2s; }
+.top-nav-tab:hover { color: var(--text-secondary); }
+.top-nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
 
-.back-link { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem; margin-bottom: 2rem; }
+.container { max-width: 780px; margin: 0 auto; padding: 3rem 2rem 6rem; }
 .back-link:hover { opacity: 0.7; }
 
 h1 { font-family: var(--font-display); font-size: 2.8rem; font-weight: 400; line-height: 1.1; margin-bottom: 0.5rem; }
@@ -102,9 +110,19 @@ tr:hover { background: var(--bg-subtle); }
 </style>
 </head>
 <body>
-<div class="container">
 
-<a href="./" class="back-link">&larr; Back to Atlas</a>
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <a href="./" class="top-nav-brand">AI Exposure <em>Atlas</em></a>
+    <div class="top-nav-tabs">
+      <a href="./" class="top-nav-tab">US</a>
+      <a href="./uk/" class="top-nav-tab">UK</a>
+      <a href="./methodology.html" class="top-nav-tab active">Methodology</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
 
 <h1>Methodology &amp; <em>Sources</em></h1>
 <p class="subtitle">How we built the AI Exposure Atlas — data pipeline, scoring methodology, sources, and limitations for both the US and UK editions.</p>
