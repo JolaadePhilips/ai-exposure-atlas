@@ -487,9 +487,11 @@ salInput.addEventListener('input',()=>{
     <div class="salary-pct-bar"><div class="salary-pct-fill" style="width:${pct}%;background:var(--ac)"></div></div>
     <div style="font-size:.82rem;font-weight:300;color:var(--t2);margin-bottom:1rem">${below} occupations pay less than ${s}${v.toLocaleString()} · ${above} pay more</div>
     <div style="font-family:var(--fm);font-size:.5rem;letter-spacing:.15em;text-transform:uppercase;color:var(--t3);margin-bottom:.4rem">Closest occupations to your salary</div>
-    ${closest.map(d=>`<div class="ti clickable" onclick="openDetail('${d.t.replace(/'/g,"\\'")}','${c}',${d.p},${d.j})"><div class="ti-n">${d.t}</div><div class="ti-v">${s}${d.p.toLocaleString()}</div><div class="ti-j">${fN(d.j)}</div></div>`).join('')}
+    ${closest.map(d=>`<div class="ti clickable" data-title="${d.t.replace(/"/g,'&quot;')}" data-country="${c}" data-pay="${d.p}" data-jobs="${d.j}"><div class="ti-n">${d.t}</div><div class="ti-v">${s}${d.p.toLocaleString()}</div><div class="ti-j">${fN(d.j)}</div></div>`).join('')}
   `;
   res.classList.add('vis');
+  // Bind click handlers on salary result items
+  res.querySelectorAll('.ti.clickable').forEach(el=>el.addEventListener('click',()=>openDetail(el.dataset.title,el.dataset.country,+el.dataset.pay,+el.dataset.jobs)));
 });
 
 // Currency toggle
@@ -561,11 +563,11 @@ function render(){
   function renderTG(id,usData,ukData,label){
     const usItems=usData.slice(0,12), ukItems=ukData.slice(0,12);
     let h='';
-    [['🇺🇸','United States',sym(),usItems,true],['🇬🇧','United Kingdom','£',ukItems,false]].forEach(([flag,name,s,items,isUS])=>{
+    [['🇺🇸','United States',sym(),'us',usItems,true],['🇬🇧','United Kingdom','£','uk',ukItems,false]].forEach(([flag,name,s,cc,items,isUS])=>{
       h+=`<div class="tl"><div class="tl-h"><span class="tl-flag">${flag}</span><span class="tl-title">${name} — ${label}</span></div>`;
       items.forEach((d,i)=>{
         const pay = isUS ? convertUS(d.p) : d.p;
-        h+=`<div class="ti clickable" data-title="${d.t.replace(/"/g,'&quot;')}" data-country="${c}" data-pay="${d.p}" data-jobs="${d.j}"><div class="ti-r">${i+1}</div><div class="ti-n">${d.t}</div><div class="ti-v">${s}${pay.toLocaleString()}</div><div class="ti-j">${fN(d.j)}</div></div>`;
+        h+=`<div class="ti clickable" data-title="${d.t.replace(/"/g,'&quot;')}" data-country="${cc}" data-pay="${d.p}" data-jobs="${d.j}"><div class="ti-r">${i+1}</div><div class="ti-n">${d.t}</div><div class="ti-v">${s}${pay.toLocaleString()}</div><div class="ti-j">${fN(d.j)}</div></div>`;
       });
       h+='</div>';
     });
