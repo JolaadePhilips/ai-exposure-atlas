@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Methodology — AI Exposure Atlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafaf8; --bg-elevated: #ffffff; --bg-subtle: #f3f3f0;
+  --border: rgba(0,0,0,0.08); --border-strong: rgba(0,0,0,0.12);
+  --text-primary: #1a1a1a; --text-secondary: rgba(26,26,26,0.6); --text-tertiary: rgba(26,26,26,0.35);
+  --accent: #b8860b; --accent-light: rgba(184,134,11,0.08);
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text-primary); font-family: var(--font-body); line-height: 1.7; }
+
+.container { max-width: 780px; margin: 0 auto; padding: 4rem 2rem 6rem; }
+
+.back-link { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem; margin-bottom: 2rem; }
+.back-link:hover { opacity: 0.7; }
+
+h1 { font-family: var(--font-display); font-size: 2.8rem; font-weight: 400; line-height: 1.1; margin-bottom: 0.5rem; }
+h1 em { font-style: italic; color: var(--accent); }
+.subtitle { font-size: 1rem; font-weight: 300; color: var(--text-secondary); margin-bottom: 3rem; }
+
+h2 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 400; margin-top: 3rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+
+h3 { font-family: var(--font-body); font-size: 1rem; font-weight: 500; margin-top: 2rem; margin-bottom: 0.5rem; }
+
+p { margin-bottom: 1rem; font-weight: 300; color: var(--text-secondary); }
+p strong { font-weight: 500; color: var(--text-primary); }
+
+a { color: var(--accent); }
+
+ul, ol { margin-bottom: 1rem; padding-left: 1.5rem; }
+li { margin-bottom: 0.4rem; font-weight: 300; color: var(--text-secondary); }
+
+code { font-family: var(--font-mono); font-size: 0.82em; background: var(--bg-subtle); padding: 0.15em 0.4em; border-radius: 4px; }
+
+.callout {
+  background: var(--bg-subtle); border: 1px solid var(--border); border-radius: 12px;
+  padding: 1.25rem 1.5rem; margin: 1.5rem 0; border-left: 3px solid var(--accent);
+}
+.callout-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
+.callout p { margin-bottom: 0; }
+
+.pipeline {
+  display: flex; flex-direction: column; gap: 0; margin: 2rem 0;
+}
+.pipeline-step {
+  display: flex; gap: 1rem; align-items: flex-start; padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.pipeline-num {
+  width: 32px; height: 32px; background: var(--accent-light); border: 1px solid rgba(184,134,11,0.2);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent); flex-shrink: 0;
+}
+.pipeline-content { flex: 1; }
+.pipeline-title { font-weight: 500; margin-bottom: 0.2rem; font-size: 0.9rem; }
+.pipeline-desc { font-size: 0.82rem; font-weight: 300; color: var(--text-secondary); }
+
+table {
+  width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.85rem;
+}
+th {
+  font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--text-tertiary); text-align: left; padding: 0.6rem 0.75rem; border-bottom: 2px solid var(--border);
+}
+td { padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--border); font-weight: 300; color: var(--text-secondary); }
+td:first-child { font-weight: 400; color: var(--text-primary); }
+tr:hover { background: var(--bg-subtle); }
+
+.score-scale {
+  display: grid; grid-template-columns: 50px 1fr 1fr; gap: 0;
+  border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin: 1.5rem 0;
+}
+.ss-header { background: var(--bg-subtle); padding: 0.5rem 0.75rem; font-family: var(--font-mono); font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-tertiary); border-bottom: 1px solid var(--border); }
+.ss-cell { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); font-size: 0.82rem; }
+.ss-score { font-family: var(--font-mono); font-weight: 500; text-align: center; }
+
+.nav-links {
+  display: flex; gap: 1rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);
+}
+.nav-link {
+  padding: 0.6rem 1.2rem; background: var(--bg-elevated); border: 1px solid var(--border);
+  border-radius: 8px; text-decoration: none; color: var(--text-primary); font-size: 0.85rem;
+  transition: all 0.2s;
+}
+.nav-link:hover { border-color: var(--accent); color: var(--accent); }
+
+.footer-note {
+  margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+  font-size: 0.75rem; font-weight: 300; color: var(--text-tertiary);
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<a href="./" class="back-link">&larr; Back to Atlas</a>
+
+<h1>Methodology &amp; <em>Sources</em></h1>
+<p class="subtitle">How we built the AI Exposure Atlas — data pipeline, scoring methodology, sources, and limitations for both the US and UK editions.</p>
+
+<h2>Overview</h2>
+
+<p>The AI Exposure Atlas visualizes how susceptible every occupation is to artificial intelligence. Each job receives a score from <strong>0 (minimal exposure)</strong> to <strong>10 (maximum exposure)</strong>, combined with employment data, pay, growth projections, and education requirements.</p>
+
+<p>There are two editions: <strong>US</strong> (342 occupations) and <strong>UK</strong> (412 occupations). Each uses different data sources but the same scoring methodology and visualization framework.</p>
+
+<div class="callout">
+<div class="callout-label">Key Principle</div>
+<p>The core signal in the scoring: <strong>if the work product is fundamentally digital and the job can be done entirely from a home office, exposure is inherently high.</strong> If the job requires physical presence, manual dexterity, or operating in unpredictable environments, exposure is inherently low.</p>
+</div>
+
+<h2>The Exposure Score (0–10)</h2>
+
+<p>The exposure score measures how much AI and automation can reshape an occupation's core tasks — not whether the job will "disappear," but how significantly AI changes what workers do day-to-day.</p>
+
+<div class="score-scale">
+<div class="ss-header">Score</div><div class="ss-header">Designation</div><div class="ss-header">Examples</div>
+<div class="ss-cell ss-score" style="color:#0f766e">0–1</div><div class="ss-cell">Minimal</div><div class="ss-cell">Cleaners, labourers, refuse workers, athletes</div>
+<div class="ss-cell ss-score" style="color:#22a88a">2–3</div><div class="ss-cell">Low</div><div class="ss-cell">Electricians, plumbers, care workers, firefighters</div>
+<div class="ss-cell ss-score" style="color:#a8b830">4–5</div><div class="ss-cell">Moderate</div><div class="ss-cell">Nurses, retail workers, physicians, engineers</div>
+<div class="ss-cell ss-score" style="color:#dc7820">6–7</div><div class="ss-cell">High</div><div class="ss-cell">Teachers, managers, lawyers, architects</div>
+<div class="ss-cell ss-score" style="color:#d03838">8–9</div><div class="ss-cell">Very High</div><div class="ss-cell">Software developers, paralegals, data analysts, editors</div>
+<div class="ss-cell ss-score" style="color:#b82020">10</div><div class="ss-cell">Maximum</div><div class="ss-cell">Medical transcriptionists</div>
+</div>
+
+<h3>What the score captures</h3>
+<ul>
+<li><strong>Task automation potential</strong> — what percentage of core job tasks can AI perform or significantly accelerate?</li>
+<li><strong>Output digitality</strong> — is the work product a digital file (document, code, analysis) or a physical outcome (repaired pipe, cleaned room, surgery)?</li>
+<li><strong>Environmental predictability</strong> — does the job happen in a controlled digital environment or chaotic physical spaces?</li>
+<li><strong>Human judgment requirement</strong> — does the work require complex interpersonal, ethical, or safety-critical decisions?</li>
+</ul>
+
+<h2>US Edition — Data Pipeline</h2>
+
+<p>The US data originates from <strong>Andrej Karpathy's</strong> open-source project, preserved by <strong>Josh Kale</strong> after the original was deleted.</p>
+
+<div class="pipeline">
+<div class="pipeline-step">
+<div class="pipeline-num">1</div>
+<div class="pipeline-content"><div class="pipeline-title">Scrape BLS Occupational Outlook Handbook</div><div class="pipeline-desc">342 occupation pages scraped from bls.gov/ooh using Playwright browser automation. Each page contains pay, employment, growth projections, education requirements, and detailed job descriptions.</div></div>
+</div>
+<div class="pipeline-step">
+<div class="pipeline-num">2</div>
+<div class="pipeline-content"><div class="pipeline-title">Parse HTML to structured data</div><div class="pipeline-desc">BeautifulSoup extracts structured fields (median pay, number of jobs, projected growth %, entry education) from each occupation page into CSV format.</div></div>
+</div>
+<div class="pipeline-step">
+<div class="pipeline-num">3</div>
+<div class="pipeline-content"><div class="pipeline-title">LLM-based AI exposure scoring</div><div class="pipeline-desc">Each occupation's full description is fed to an LLM (Gemini Flash via OpenRouter) with a detailed scoring rubric. The LLM evaluates task automation potential, output digitality, and environmental factors to assign a 0–10 score with a written rationale.</div></div>
+</div>
+<div class="pipeline-step">
+<div class="pipeline-num">4</div>
+<div class="pipeline-content"><div class="pipeline-title">Build visualization data</div><div class="pipeline-desc">Scores, pay, employment, growth, and education are merged into a single JSON file (data.json) that powers the interactive frontend.</div></div>
+</div>
+</div>
+
+<h3>US Data Sources</h3>
+<table>
+<tr><th>Data</th><th>Source</th><th>Date</th></tr>
+<tr><td>Occupations, pay, employment, growth</td><td><a href="https://www.bls.gov/ooh/">Bureau of Labor Statistics — Occupational Outlook Handbook</a></td><td>2024 edition (projections to 2034)</td></tr>
+<tr><td>AI exposure scores</td><td>LLM scoring (Gemini Flash) with custom rubric</td><td>2024</td></tr>
+<tr><td>Occupation count</td><td>342 occupations</td><td>—</td></tr>
+<tr><td>Average exposure</td><td>5.3/10 across all occupations</td><td>—</td></tr>
+</table>
+
+<h2>UK Edition — Data Pipeline</h2>
+
+<p>The UK edition was built by combining multiple government data sources, since the UK has no single equivalent to the BLS OOH.</p>
+
+<div class="pipeline">
+<div class="pipeline-step">
+<div class="pipeline-num">1</div>
+<div class="pipeline-content"><div class="pipeline-title">SOC 2020 Occupational Classification</div><div class="pipeline-desc">412 unit groups (4-digit codes) from the ONS Standard Occupational Classification 2020 Volume 1. Provides occupation titles, full descriptions, typical tasks, entry requirements, and example job titles.</div></div>
+</div>
+<div class="pipeline-step">
+<div class="pipeline-num">2</div>
+<div class="pipeline-content"><div class="pipeline-title">ASHE Pay Data</div><div class="pipeline-desc">Median annual and hourly pay from the Annual Survey of Hours and Earnings (ASHE) Table 14, 2025 provisional release. Matched to SOC 2020 4-digit codes. 363 of 412 occupations have pay data (remainder suppressed for statistical reliability).</div></div>
+</div>
+<div class="pipeline-step">
+<div class="pipeline-num">3</div>
+<div class="pipeline-content"><div class="pipeline-title">NOMIS Employment Data</div><div class="pipeline-desc">Employment counts from the Annual Population Survey via the NOMIS API (dataset NM_218_1). Period: Oct 2024 – Sep 2025. All 412 occupations matched at 4-digit SOC 2020 level.</div></div>
+</div>
+<div class="pipeline-step">
+<div class="pipeline-num">4</div>
+<div class="pipeline-content"><div class="pipeline-title">AI Exposure Scoring</div><div class="pipeline-desc">Scores assigned via two methods: (a) crosswalk from US scores for 114 occupations with clear equivalents, and (b) heuristic scoring based on SOC major group, task descriptions, and keyword analysis for the remaining 298 occupations. See scoring methodology below.</div></div>
+</div>
+<div class="pipeline-step">
+<div class="pipeline-num">5</div>
+<div class="pipeline-content"><div class="pipeline-title">Data Merge &amp; Visualization</div><div class="pipeline-desc">All sources merged by SOC code into a single JSON dataset. The same interactive frontend as the US edition, adapted for £ currency and UK occupation categories.</div></div>
+</div>
+</div>
+
+<h3>UK Data Sources</h3>
+<table>
+<tr><th>Data</th><th>Source</th><th>Date</th></tr>
+<tr><td>Occupation classification, descriptions, tasks</td><td><a href="https://www.ons.gov.uk/methodology/classificationsandstandards/standardoccupationalclassificationsoc/soc2020">ONS SOC 2020 Volume 1</a></td><td>December 2025 edition</td></tr>
+<tr><td>Median annual/hourly pay</td><td><a href="https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/datasets/occupation4digitsoc2010ashetable14">ASHE Table 14</a> (2025 provisional)</td><td>2025</td></tr>
+<tr><td>Employment counts</td><td><a href="https://www.nomisweb.co.uk/">NOMIS</a> — Annual Population Survey (NM_218_1)</td><td>Oct 2024 – Sep 2025</td></tr>
+<tr><td>Entry requirements</td><td>SOC 2020 Volume 1</td><td>—</td></tr>
+<tr><td>Occupation count</td><td>412 unit groups (4-digit SOC)</td><td>—</td></tr>
+<tr><td>Average exposure</td><td>5.0/10 across all occupations</td><td>—</td></tr>
+</table>
+
+<h3>UK Scoring Methodology (Detail)</h3>
+
+<p>Since we could not run the same LLM scoring pipeline used for the US edition (which required API access to score each occupation individually), the UK scores were generated using a two-step approach:</p>
+
+<h3>Step 1: US Crosswalk (114 occupations)</h3>
+<p>For occupations with clear US equivalents, we directly mapped the US exposure score. Matching was done by <strong>fuzzy title matching</strong> — comparing word overlap between UK SOC titles and US BLS titles, requiring at least 40% word overlap for a match.</p>
+<p>Examples: "Programmers and software development professionals" → US "Software developers" (9), "Solicitors and lawyers" → US "Lawyers" (8).</p>
+
+<h3>Step 2: Heuristic Scoring (298 occupations)</h3>
+<p>For occupations without a US match, scores were assigned using a rules-based system combining:</p>
+
+<ol>
+<li><strong>Keyword analysis</strong> — scanning job title and SOC task descriptions for terms indicating digital work (software, data, financial analysis → high) or physical work (construction, cleaning, driving → low)</li>
+<li><strong>SOC major group patterns</strong> — each of the 9 SOC major groups has a characteristic exposure range:
+<ul>
+<li>Group 4 (Admin & Secretarial) → base 8</li>
+<li>Group 2 (Professional) → base 6, adjusted by sub-field</li>
+<li>Group 5 (Skilled Trades) → base 2</li>
+<li>Group 9 (Elementary) → base 2</li>
+</ul>
+</li>
+<li><strong>Output digitality</strong> — occupations where the primary output is digital (reports, code, designs) scored higher than those with physical outputs</li>
+</ol>
+
+<div class="callout">
+<div class="callout-label">Important Limitation</div>
+<p>The UK scores are <strong>estimates</strong>, not individually calibrated LLM assessments like the US scores. While the crosswalked scores (114 occupations covering the major professions) are high-confidence, the heuristic scores (298 occupations) should be treated as indicative rather than precise. We plan to improve these with individual LLM scoring in a future update.</p>
+</div>
+
+<h2>What This Is Not</h2>
+
+<ul>
+<li><strong>Not a prediction of job losses.</strong> A high exposure score means AI significantly changes what workers do, not that the job disappears. Software developers score 9/10 but employment is growing.</li>
+<li><strong>Not a timeline.</strong> The scores don't indicate when AI impact will happen — some effects are already occurring, others may take decades.</li>
+<li><strong>Not individual advice.</strong> Within any occupation, individual roles vary enormously. A radiologist reading scans faces different exposure than one performing interventional procedures.</li>
+</ul>
+
+<h2>Related Research</h2>
+
+<ul>
+<li><strong>Frey & Osborne (2017)</strong> — "The Future of Employment" — the foundational study estimating 47% of US jobs at high risk of computerisation</li>
+<li><strong>ONS (2019)</strong> — "Probability of Automation in England" — UK-specific adaptation using OECD task-based methodology</li>
+<li><strong>Felten, Raj & Seamans (2023)</strong> — AI Occupational Exposure Index (AIOE) — task-level AI capability mapping</li>
+<li><strong>GAISI (2025, UCL)</strong> — Generative AI Susceptibility Index — the most recent UK-specific study using LLM task ratings</li>
+<li><strong>UK Government DSIT/DfE (2023)</strong> — "Impact of AI on UK Jobs and Training"</li>
+</ul>
+
+<h2>Open Source</h2>
+
+<p>The complete code, data, and methodology are open source:</p>
+<ul>
+<li><strong>This project:</strong> <a href="https://github.com/JolaadePhilips/ai-exposure-atlas">github.com/JolaadePhilips/ai-exposure-atlas</a></li>
+<li><strong>Original US data pipeline:</strong> <a href="https://github.com/JoshKale/jobs">github.com/JoshKale/jobs</a> (preserved by Josh Kale)</li>
+<li><strong>Original scoring concept:</strong> Andrej Karpathy</li>
+</ul>
+
+<div class="nav-links">
+<a href="./" class="nav-link">US Atlas (342 jobs) &rarr;</a>
+<a href="./uk/" class="nav-link">UK Atlas (412 jobs) &rarr;</a>
+</div>
+
+<div class="footer-note">
+AI Exposure Atlas &middot; 2026 &middot; Data from BLS, ONS, NOMIS, ASHE &middot; Open source under MIT licence
+</div>
+
+</div>
+</body>
+</html>
